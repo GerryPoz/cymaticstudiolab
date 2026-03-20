@@ -99,8 +99,18 @@ nav{
   text-align:center;
   padding:7rem 1.5rem 5rem;
   overflow:hidden;
+  isolation:isolate;
+  z-index:0;
 }
-#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;}
+#heroCanvas{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  z-index:0;
+  opacity:.5;
+  pointer-events:none;
+  display:block;
+}
 
 /* radial glow behind logo */
 .hero-glow{
@@ -201,10 +211,11 @@ nav{
 .scroll-line{width:1px;height:30px;background:linear-gradient(to bottom,rgba(255,140,0,.7),transparent);animation:pulse 2s infinite;}
 
 /* ══ DIVIDER ══ */
-.section-divider{height:1px;background:var(--border2);}
+.section-divider{height:1px;background:var(--border2);position:relative;z-index:1;}
 
 /* ══ SECTION BASE ══ */
-section.content{padding:6rem 1.5rem;position:relative;}
+section.content{padding:6rem 1.5rem;position:relative;z-index:1;}
+footer{position:relative;z-index:1;}
 .container{max-width:1080px;margin:0 auto;}
 
 .section-tag{
@@ -430,6 +441,7 @@ footer{
   padding:2rem 2.5rem;border-top:1px solid var(--border2);
   background:var(--bg);
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  position:relative;z-index:1;
 }
 footer p{font-size:.72rem;color:var(--text3);letter-spacing:.02em;}
 .footer-links{display:flex;gap:1.5rem;}
@@ -440,7 +452,8 @@ footer a:hover{color:#fff;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @keyframes fadeIn{to{opacity:.6}}
 @keyframes pulse{0%,100%{opacity:.25}50%{opacity:.9}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal{opacity:1;transform:none;transition:opacity .7s ease,transform .7s ease;}
+.reveal.animate{opacity:0;transform:translateY(24px);}
 .reveal.visible{opacity:1;transform:none;}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 </style>
@@ -450,7 +463,7 @@ footer a:hover{color:#fff;}
 <!-- ══ NAV ══ -->
 <nav>
   <a class="logo-wrap" href="#">
-    <img class="logo-icon" src="/Icona-512.png" alt="icon">
+    <img class="logo-icon" src="/mnt/user-data/uploads/Icona-512.png" alt="icon">
     <div class="logo-text">
       <div class="l1">Cymatics</div>
       <div class="l2">Studio Lab</div>
@@ -471,7 +484,7 @@ footer a:hover{color:#fff;}
 
   <div class="hero-inner">
     <!-- Real app icon -->
-    <img class="hero-logo" src="/Icona-512.png" alt="Cymatics Studio Lab icon">
+    <img class="hero-logo" src="/mnt/user-data/uploads/Icona-512.png" alt="Cymatics Studio Lab icon">
 
     <h1 class="hero-title">
       <span class="row1">Cymatics</span>
@@ -818,8 +831,13 @@ function makeRenderer(id,nodesFn,palFn,res,speed){
 /* HERO */
 (function(){
   const c=document.getElementById('heroCanvas');
-  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize);
+  const hero=document.getElementById('hero');
+  function resize(){
+    c.width=hero.offsetWidth;
+    c.height=hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
   const ctx=c.getContext('2d');let t=0;
   function render(){
     const W=c.width,H=c.height,res=6,cx=W/2,cy=H/2;
