@@ -296,6 +296,7 @@ h2.section-title .orange{color:var(--orange);}
   box-shadow:0 0 60px rgba(255,140,0,.12),0 0 120px rgba(120,80,200,.08);
 }
 .feat-canvas-wrap canvas{width:100%;height:100%;display:block;}
+.feat-canvas-wrap img{width:100%;height:100%;display:block;object-fit:cover;}
 
 .feat-text{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2.2rem 2.4rem;}
 
@@ -546,7 +547,7 @@ footer a:hover{color:#fff;}
         </div>
       </div>
       <div class="about-img-wrap reveal d2">
-        <img src="https://play-lh.googleusercontent.com/tt3fc3-k62_0x4A4bW_1_4ZFL3Uww4kRR4kgNObCtu3pWyMMxkRgFEKgEEDtdwxtr2rq4DmwnlizMiXYvSO3UQ=w526-h296" alt="Cymatics wave pattern">
+        <img src="/mnt/user-data/uploads/base-AppWeb5.jpg" alt="Cymatics wave pattern">
       </div>
     </div>
   </div>
@@ -593,7 +594,7 @@ footer a:hover{color:#fff;}
             <li><strong>Infinite unique combinations</strong> of patterns and shapes</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><canvas id="cvArt" width="480" height="480"></canvas></div>
+        <div class="feat-canvas-wrap"><img src="/base-AppWeb1.jpg" alt="Generative Art"></div>
       </div>
 
       <div class="feat-block rev reveal">
@@ -608,7 +609,7 @@ footer a:hover{color:#fff;}
             <li><strong>Smooth real-time</strong> visual feedback at 60 FPS</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><canvas id="cvCtrl" width="480" height="480"></canvas></div>
+        <div class="feat-canvas-wrap"><img src="/base-AppWeb2.jpg" alt="Parameter Control"></div>
       </div>
 
       <div class="feat-block reveal">
@@ -623,7 +624,7 @@ footer a:hover{color:#fff;}
             <li>Ideal for <strong>art projects</strong> and creative workflows</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><canvas id="cvExp" width="480" height="480"></canvas></div>
+        <div class="feat-canvas-wrap"><img src="/base-AppWeb3.jpg" alt="Export"></div>
       </div>
 
       <div class="feat-block rev reveal">
@@ -638,7 +639,7 @@ footer a:hover{color:#fff;}
             <li>Useful for <strong>students, educators</strong> and physics enthusiasts</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><canvas id="cvEdu" width="480" height="480"></canvas></div>
+        <div class="feat-canvas-wrap"><img src="/base-AppWeb4.jpg" alt="Educational"></div>
       </div>
 
     </div>
@@ -866,10 +867,6 @@ function makeRenderer(id,nodesFn,palFn,res,speed){
 })();
 
 /* Feature canvases */
-makeRenderer('cvArt',(cx,cy)=>{const R=cx*.55;return[...make4fold(cx,cy,R,.026,2.1,1.0),...make4fold(cx,cy,R*.52,.038,3.2,.5,Math.PI/4)];},palMain,3,.026);
-makeRenderer('cvCtrl',(cx,cy)=>[...make8fold(cx,cy,cx*.5,.024,1.9,1.0)],palBlue,3,.02);
-makeRenderer('cvExp',(cx,cy)=>Array.from({length:6},(_,i)=>({rx:cx*.52*Math.cos(i*Math.PI/3),ry:cx*.52*Math.sin(i*Math.PI/3),k:.027,s:2.2,a:1,ph:0})),palMain,3,.023);
-makeRenderer('cvEdu',(cx,cy)=>[...make4fold(cx,cy,cx*.56,.03,1.6,1.0),{rx:0,ry:0,k:.02,s:1.2,a:.4,ph:0}],palBlue,3,.018);
 
 /* Scroll reveal */
 const obs=new IntersectionObserver(entries=>{
