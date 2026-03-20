@@ -1,129 +1,858 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cymatics Studio Lab</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cymatics Studio Lab – Real-Time Wave Art & Generative Simulation</title>
+<meta name="description" content="The most advanced cymatics simulator. Create cymatics patterns, Faraday waves and generative art from wave physics in real time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   DESIGN TOKENS — from app home screen
+   ══════════════════════════════════════ */
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111115;
+  --bg3:#18181e;
+  --card:#1a1a22;
+  --card2:#141418;
+  --border:rgba(255,255,255,0.1);
+  --border2:rgba(255,255,255,0.07);
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background-color: #0d0d0d;
-            color: #f2f2f2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
+  /* rainbow gradient — matches "STUDIO LAB" in the app */
+  --rainbow: linear-gradient(90deg,
+    #ff8c00 0%,
+    #ff5500 10%,
+    #cc44cc 30%,
+    #8855ff 50%,
+    #44aaff 70%,
+    #22ddcc 90%,
+    #44ffcc 100%
+  );
 
-        header {
-            width: 100%;
-            padding: 2rem 1rem;
-            text-align: center;
-            background: #111;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-        }
+  --orange:#ff8c00;
+  --orange-glow:rgba(255,140,0,0.35);
+  --white:#ffffff;
+  --white2:#e8e8e8;
+  --grey:#888899;
+  --grey2:#555566;
 
-        header h1 {
-            margin: 0;
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
+  --btn-primary:#ffffff;
+  --btn-secondary:#1e1e28;
 
-        header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.1rem;
-            color: #cccccc;
-        }
+  --text:#ffffff;
+  --text2:#aaaacc;
+  --text3:#666677;
+}
 
-        main {
-            max-width: 900px;
-            width: 90%;
-            margin-top: 3rem;
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.5);
-        }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-        h2 {
-            font-size: 1.6rem;
-            margin-top: 0;
-            color: #ffffff;
-        }
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 2.5rem;
+  background:rgba(10,10,10,0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+}
 
-        p {
-            line-height: 1.6;
-            color: #d9d9d9;
-        }
+/* logo — matches app: CYMATICS white, STUDIO LAB rainbow */
+.logo-wrap{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:32px;height:32px;flex-shrink:0;border-radius:8px;object-fit:contain;}
+.logo-text{font-size:.88rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1;}
+.logo-text .l1{color:#fff;}
+.logo-text .l2{
+  background:var(--rainbow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-        .button-container {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+.nav-right{display:flex;align-items:center;gap:1.5rem;}
+.nav-link{font-size:.78rem;font-weight:500;color:var(--text2);text-decoration:none;
+  letter-spacing:.02em;transition:color .2s;}
+.nav-link:hover{color:#fff;}
+.nav-cta{
+  font-size:.8rem;font-weight:700;letter-spacing:.04em;
+  background:var(--btn-primary);color:#000;
+  padding:.55rem 1.4rem;border-radius:100px;
+  text-decoration:none;transition:opacity .2s,transform .2s;
+  white-space:nowrap;
+}
+.nav-cta:hover{opacity:.92;transform:scale(1.02);}
+@media(max-width:600px){.nav-right .nav-link{display:none;}}
 
-        a.button {
-            padding: 0.8rem 1.4rem;
-            background: #333;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.2s ease;
-            font-weight: 500;
-        }
+/* ══ HERO ══ */
+#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:7rem 1.5rem 5rem;
+  overflow:hidden;
+}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.55;}
 
-        a.button:hover {
-            background: #555;
-        }
+/* radial glow behind logo */
+.hero-glow{
+  position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  width:340px;height:340px;z-index:0;
+  background:radial-gradient(ellipse,rgba(255,140,0,.22) 0%,transparent 70%);
+  pointer-events:none;
+}
 
-        footer {
-            margin-top: auto;
-            padding: 2rem 1rem;
-            text-align: center;
-            color: #777;
-            font-size: 0.9rem;
-        }
-    </style>
+.hero-inner{position:relative;z-index:2;max-width:640px;width:100%;}
+
+/* SVG orbital logo — recreates app icon */
+.hero-logo{
+  width:130px;height:130px;margin:0 auto 2.2rem;
+  opacity:0;animation:fadeUp .8s .1s forwards;
+  filter:drop-shadow(0 0 28px rgba(255,140,0,.6)) drop-shadow(0 0 60px rgba(255,140,0,.3));
+  object-fit:contain;border-radius:24px;
+}
+
+.hero-title{
+  font-size:clamp(3rem,10vw,6.5rem);
+  font-weight:800;letter-spacing:-.01em;text-transform:uppercase;
+  line-height:1.0;
+  opacity:0;animation:fadeUp .8s .3s forwards;
+}
+.hero-title .row1{color:#fff;display:block;}
+.hero-title .row2{
+  display:block;
+  background:var(--rainbow);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub{
+  margin-top:1.4rem;
+  font-size:clamp(.95rem,2.2vw,1.15rem);
+  font-weight:400;color:var(--text2);letter-spacing:.01em;
+  opacity:0;animation:fadeUp .8s .5s forwards;
+}
+
+/* photosensitivity warning box — replicates app exactly */
+.warning-box{
+  margin:2rem auto 0;
+  max-width:500px;
+  background:rgba(60,8,8,.85);
+  border:1px solid rgba(200,50,50,.35);
+  border-radius:14px;
+  padding:1rem 1.4rem;
+  text-align:left;
+  opacity:0;animation:fadeUp .8s .65s forwards;
+}
+.warning-title{
+  font-size:.78rem;font-weight:700;letter-spacing:.04em;
+  color:#ff6b6b;margin-bottom:.5rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.warning-body{
+  font-size:.75rem;font-style:italic;color:var(--text2);line-height:1.6;
+}
+
+.hero-cta-group{
+  margin-top:2rem;display:flex;flex-direction:column;gap:.9rem;align-items:center;
+  width:100%;max-width:440px;margin-left:auto;margin-right:auto;
+  opacity:0;animation:fadeUp .8s .8s forwards;
+}
+
+/* Primary pill button — white, exactly like "START SIMULATOR" */
+.btn-primary-pill{
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  width:100%;
+  background:#fff;color:#000;
+  padding:1.05rem 2rem;border-radius:100px;
+  font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 4px 30px rgba(255,255,255,.15);
+  transition:opacity .2s,transform .2s,box-shadow .2s;
+}
+.btn-primary-pill:hover{opacity:.93;transform:translateY(-2px);box-shadow:0 8px 40px rgba(255,255,255,.25);}
+
+/* Secondary dark rounded buttons — matches "ABOUT US / MANUAL" row */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;width:100%;}
+.btn-secondary-pill{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--btn-secondary);color:var(--white2);
+  padding:.95rem 1rem;border-radius:14px;
+  font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border:1px solid var(--border);
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.btn-secondary-pill:hover{background:#22222e;border-color:rgba(255,255,255,.2);transform:translateY(-2px);}
+
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  opacity:0;animation:fadeIn 1s 2s forwards;
+}
+.scroll-hint span{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text3);}
+.scroll-line{width:1px;height:30px;background:linear-gradient(to bottom,rgba(255,140,0,.7),transparent);animation:pulse 2s infinite;}
+
+/* ══ DIVIDER ══ */
+.section-divider{height:1px;background:var(--border2);}
+
+/* ══ SECTION BASE ══ */
+section.content{padding:6rem 1.5rem;position:relative;}
+.container{max-width:1080px;margin:0 auto;}
+
+.section-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:1.1rem;
+}
+.section-tag .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--orange);box-shadow:0 0 8px var(--orange-glow);
+  flex-shrink:0;
+}
+
+h2.section-title{
+  font-size:clamp(2rem,5vw,3.2rem);font-weight:800;
+  letter-spacing:-.02em;line-height:1.1;margin-bottom:1.3rem;color:#fff;
+}
+h2.section-title .rainbow{
+  background:var(--rainbow);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+h2.section-title .orange{color:var(--orange);}
+
+.body-copy{color:var(--text2);line-height:1.85;font-size:.97rem;}
+.body-copy p{margin-bottom:.9rem;}
+.body-copy strong{color:#fff;font-weight:600;}
+.body-copy em{color:var(--orange);}
+
+/* ══ ABOUT ══ */
+#about{background:var(--bg);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+@media(max-width:700px){.about-grid{grid-template-columns:1fr;gap:2.5rem;}}
+
+.about-img-wrap{
+  position:relative;border-radius:50%;overflow:hidden;aspect-ratio:1;
+  border:1.5px solid rgba(255,140,0,.25);
+  box-shadow:0 0 80px rgba(255,140,0,.18),0 0 160px rgba(120,80,200,.1);
+}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.scientists{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;}
+.scientist{
+  flex:1;min-width:130px;padding:.9rem 1.1rem;
+  background:var(--card);
+  border:1px solid var(--border2);border-radius:12px;
+}
+.sci-name{
+  font-size:.82rem;font-weight:700;letter-spacing:.04em;
+  color:var(--orange);margin-bottom:.35rem;
+}
+.sci-role{font-size:.77rem;color:var(--text2);line-height:1.55;}
+
+/* ══ AUDIENCE ══ */
+#audience{background:var(--bg2);}
+.aud-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1rem;margin-top:2.5rem;}
+.aud-card{
+  padding:1.8rem 1.5rem;text-align:center;
+  background:var(--card);border:1px solid var(--border2);border-radius:16px;
+  transition:border-color .25s,transform .25s,background .25s;
+}
+.aud-card:hover{border-color:rgba(255,140,0,.3);transform:translateY(-4px);background:var(--card2);}
+.aud-icon{font-size:1.9rem;display:block;margin-bottom:.9rem;}
+.aud-card h3{font-size:.85rem;font-weight:700;letter-spacing:.04em;
+  color:#fff;margin-bottom:.5rem;}
+.aud-card p{font-size:.82rem;color:var(--text2);line-height:1.65;}
+
+/* ══ FEATURES ══ */
+#features{background:var(--bg);}
+.feat-sections{display:flex;flex-direction:column;gap:5rem;margin-top:3.5rem;}
+.feat-block{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.feat-block.rev{direction:rtl;}
+.feat-block.rev>*{direction:ltr;}
+@media(max-width:700px){.feat-block,.feat-block.rev{grid-template-columns:1fr;direction:ltr;gap:2rem;}}
+
+.feat-canvas-wrap{
+  border-radius:50%;overflow:hidden;aspect-ratio:1;
+  border:1.5px solid rgba(255,140,0,.2);
+  box-shadow:0 0 60px rgba(255,140,0,.12),0 0 120px rgba(120,80,200,.08);
+}
+.feat-canvas-wrap canvas{width:100%;height:100%;display:block;}
+
+.feat-text{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:2.2rem 2.4rem;}
+
+.feat-label{
+  display:inline-block;font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.25rem .8rem;border-radius:100px;margin-bottom:1rem;
+}
+.fl-art{background:rgba(255,140,0,.12);color:var(--orange);border:1px solid rgba(255,140,0,.25);}
+.fl-ctrl{background:rgba(100,160,255,.1);color:#88bbff;border:1px solid rgba(100,160,255,.25);}
+.fl-exp{background:rgba(180,120,255,.1);color:#cc99ff;border:1px solid rgba(180,120,255,.25);}
+.fl-edu{background:rgba(80,220,180,.1);color:#55ddbb;border:1px solid rgba(80,220,180,.25);}
+
+.feat-h{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;letter-spacing:-.02em;
+  color:#fff;line-height:1.15;margin-bottom:.9rem;}
+.feat-h .rainbow{background:var(--rainbow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.feat-h .orange{color:var(--orange);}
+.feat-h .blue{color:#88bbff;}
+.feat-h .purple{color:#cc99ff;}
+.feat-h .teal{color:#55ddbb;}
+
+.feat-desc{font-size:.9rem;color:var(--text2);line-height:1.8;margin-bottom:1.3rem;}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.feat-list li{
+  font-size:.85rem;color:var(--text2);line-height:1.6;
+  padding:.55rem .8rem .55rem 1rem;
+  border-left:2px solid rgba(255,140,0,.4);
+  border-radius:0 8px 8px 0;
+  background:rgba(255,140,0,.04);
+}
+.feat-list li strong{color:#fff;font-weight:600;}
+
+/* ══ SCREENSHOTS ══ */
+#screenshots{background:var(--bg2);}
+.screens-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+@media(max-width:800px){.screens-grid{grid-template-columns:repeat(2,1fr);}}
+.screen-wrap{
+  position:relative;border-radius:12px;overflow:hidden;
+  border:1px solid var(--border2);
+  transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer;
+}
+.screen-wrap:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 30px rgba(255,140,0,.15);
+  border-color:rgba(255,140,0,.3);
+}
+.screen-wrap img{width:100%;display:block;}
+.screen-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:.6rem .8rem;
+  background:linear-gradient(to top,rgba(0,0,0,.95),transparent);
+  font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);
+}
+
+/* ══ PREMIUM ══ */
+#premium{background:var(--bg);}
+.premium-inner{max-width:720px;margin:0 auto;text-align:center;}
+.prem-pills{display:flex;justify-content:center;gap:.8rem;margin-top:2.5rem;flex-wrap:wrap;}
+.prem-pill{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.7rem 1.3rem;border-radius:100px;
+  background:var(--card);border:1px solid var(--border2);
+  font-size:.8rem;font-weight:600;color:var(--text2);
+  transition:border-color .2s,color .2s,transform .2s;
+}
+.prem-pill:hover{border-color:rgba(255,140,0,.4);color:#fff;transform:scale(1.04);}
+.prem-pill .pi{font-size:1.1rem;}
+
+.price-card{
+  display:inline-block;text-align:center;
+  margin-top:3rem;padding:2.5rem 4rem;
+  background:var(--card);
+  border:1px solid rgba(255,140,0,.2);border-radius:20px;
+  box-shadow:0 0 60px rgba(255,140,0,.08);
+}
+.price-lbl{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:.5rem;}
+.price-num{
+  font-size:4.5rem;font-weight:800;letter-spacing:-.03em;line-height:1;
+  background:var(--rainbow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.price-note{font-size:.8rem;color:var(--text2);margin-top:.5rem;}
+
+/* ══ DOWNLOAD ══ */
+#download{background:var(--bg2);text-align:center;padding-bottom:6rem;}
+#download::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(255,140,0,.07) 0%,transparent 55%);
+  pointer-events:none;}
+#download .container{position:relative;z-index:1;}
+
+.dl-pre{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:1.4rem;}
+.dl-title{
+  font-size:clamp(2.2rem,7vw,5rem);font-weight:800;
+  letter-spacing:-.02em;line-height:1.0;margin-bottom:1rem;
+}
+.dl-title .white{color:#fff;display:block;}
+.dl-title .rainbow{
+  display:block;
+  background:var(--rainbow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.dl-sub{color:var(--text2);font-size:.97rem;margin-bottom:.5rem;}
+.dl-note{font-size:.72rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2.8rem;}
+
+/* big play badge */
+.play-badge{
+  display:inline-flex;align-items:center;gap:1rem;
+  background:#fff;color:#000;
+  padding:1rem 2.2rem;border-radius:16px;
+  text-decoration:none;
+  box-shadow:0 4px 40px rgba(255,255,255,.18);
+  transition:transform .2s,box-shadow .2s;
+}
+.play-badge:hover{transform:translateY(-3px);box-shadow:0 12px 60px rgba(255,255,255,.28);}
+.play-badge svg{width:28px;height:28px;flex-shrink:0;}
+.play-badge-text .top{font-size:.6rem;letter-spacing:.06em;color:#666;}
+.play-badge-text .name{font-size:1.05rem;font-weight:800;letter-spacing:.02em;}
+
+.stats-strip{
+  display:flex;justify-content:center;gap:0;
+  margin-top:4rem;flex-wrap:wrap;
+}
+.stat{
+  display:flex;flex-direction:column;align-items:center;gap:.3rem;
+  padding:1.4rem 2.5rem;
+  border:1px solid var(--border2);border-right:none;
+}
+.stat:first-child{border-radius:12px 0 0 12px;}
+.stat:last-child{border-right:1px solid var(--border2);border-radius:0 12px 12px 0;}
+.stat-n{
+  font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1;
+}
+.stat-l{font-size:.6rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text3);}
+@media(max-width:560px){
+  .stats-strip{flex-direction:column;align-items:center;}
+  .stat{width:200px;border-right:1px solid var(--border2);border-bottom:none;border-radius:0;}
+  .stat:first-child{border-radius:12px 12px 0 0;}
+  .stat:last-child{border-bottom:1px solid var(--border2);border-radius:0 0 12px 12px;}
+}
+
+/* ══ FOOTER ══ */
+footer{
+  padding:2rem 2.5rem;border-top:1px solid var(--border2);
+  background:var(--bg);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+footer p{font-size:.72rem;color:var(--text3);letter-spacing:.02em;}
+.footer-links{display:flex;gap:1.5rem;}
+footer a{color:var(--text3);text-decoration:none;font-size:.72rem;transition:color .2s;}
+footer a:hover{color:#fff;}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{to{opacity:.6}}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:.9}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>Cymatics Studio Lab</h1>
-    <p>Simulatore di onde, vibrazioni e geometrie risonanti</p>
-</header>
-
-<main>
-    <h2>Benvenuto</h2>
-    <p>
-        Cymatics Studio Lab è un ambiente creativo progettato per esplorare la bellezza delle forme
-        generate dal suono. Unisce simulazione fisica, estetica minimalista e strumenti intuitivi
-        per permettere a chiunque di sperimentare con onde, frequenze e pattern risonanti.
-    </p>
-
-    <p>
-        Questa pagina diventerà il punto di riferimento ufficiale dell’app: qui troverai la
-        <strong>Privacy Policy</strong>, i <strong>Termini di Servizio</strong>, aggiornamenti,
-        link al Play Store e contenuti aggiuntivi.
-    </p>
-
-    <div class="button-container">
-        <a class="button" href="https://cymaticslab.netlify.app/">Apri la simulazione</a>
-        <a class="button" href="privacy.html">Privacy Policy</a>
-        <a class="button" href="terms.html">Termini di Servizio</a>
-        <a class="button" href="#">Download App</a>
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="logo-wrap" href="#">
+    <img class="logo-icon" src="/mnt/user-data/uploads/Icona-512.png" alt="icon">
+    <div class="logo-text">
+      <div class="l1">Cymatics</div>
+      <div class="l2">Studio Lab</div>
     </div>
-</main>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="#about">Science</a>
+    <a class="nav-link" href="#features">Features</a>
+    <a class="nav-link" href="#screenshots">Gallery</a>
+    <a class="nav-cta" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">Get the App</a>
+  </div>
+</nav>
 
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-glow"></div>
+
+  <div class="hero-inner">
+    <!-- Real app icon -->
+    <img class="hero-logo" src="/mnt/user-data/uploads/Icona-512.png" alt="Cymatics Studio Lab icon">
+
+    <h1 class="hero-title">
+      <span class="row1">Cymatics</span>
+      <span class="row2">Studio Lab</span>
+    </h1>
+
+    <p class="hero-sub">The most advanced cymatics simulator.</p>
+
+    <!-- warning box — faithful to app -->
+    <div class="warning-box">
+      <div class="warning-title">⚠️ PHOTOSENSITIVITY WARNING:</div>
+      <div class="warning-body">This application contains rapidly flashing lights and geometric patterns which may trigger seizures in people with photosensitive epilepsy. Viewer discretion is advised.</div>
+    </div>
+
+    <!-- CTA group — mirrors app layout exactly -->
+    <div class="hero-cta-group">
+      <a class="btn-primary-pill" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">
+        START SIMULATOR
+      </a>
+      <div class="btn-row">
+        <a class="btn-secondary-pill" href="#about">About Us</a>
+        <a class="btn-secondary-pill" href="#features">Features</a>
+      </div>
+      <div class="btn-row">
+        <a class="btn-secondary-pill" href="#screenshots">Gallery</a>
+        <a class="btn-secondary-pill" href="/cdn-cgi/l/email-protection#ec8f95818d98858f9f9899888583808d8eac8b818d8580c28f8381">Contacts</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ ABOUT ══ -->
+<section class="content" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-tag"><span class="dot"></span>Origin</div>
+        <h2 class="section-title">Born from<br><span class="rainbow">Wave Physics</span></h2>
+        <div class="body-copy">
+          <p>Cymatics Studio Lab is a powerful real-time wave simulator and generative art tool inspired by two pioneers who made sound <em>visible</em>.</p>
+          <p>Explore <strong>cymatics patterns</strong>, <strong>Faraday waves</strong>, and <strong>mathematical visualizations</strong> through an interactive interface designed for both scientists and artists.</p>
+        </div>
+        <div class="scientists">
+          <div class="scientist">
+            <div class="sci-name">Michael Faraday</div>
+            <div class="sci-role">Discovered Faraday waves — standing wave patterns on vibrating liquid surfaces (1831).</div>
+          </div>
+          <div class="scientist">
+            <div class="sci-name">Hans Jenny</div>
+            <div class="sci-role">Founded the field of cymatics — the study of visible sound and vibration patterns (1967).</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-img-wrap reveal d2">
+        <img src="https://play-lh.googleusercontent.com/tt3fc3-k62_0x4A4bW_1_4ZFL3Uww4kRR4kgNObCtu3pWyMMxkRgFEKgEEDtdwxtr2rq4DmwnlizMiXYvSO3UQ=w526-h296" alt="Cymatics wave pattern">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ AUDIENCE ══ -->
+<section class="content" id="audience" style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag"><span class="dot"></span>Perfect for</div>
+      <h2 class="section-title">Who Uses <span class="rainbow">Studio Lab?</span></h2>
+    </div>
+    <div class="aud-grid">
+      <div class="aud-card reveal d1"><span class="aud-icon">🎨</span><h3>Generative Artists</h3><p>Build infinite collections of abstract visuals and symmetrical wave artworks.</p></div>
+      <div class="aud-card reveal d2"><span class="aud-icon">✏️</span><h3>Digital Designers</h3><p>Source stunning textures and dynamic patterns for creative projects.</p></div>
+      <div class="aud-card reveal d3"><span class="aud-icon">🎵</span><h3>Sound Enthusiasts</h3><p>Visualize music and frequencies — see sound take geometric shape.</p></div>
+      <div class="aud-card reveal d4"><span class="aud-icon">🎓</span><h3>Students &amp; Educators</h3><p>Explore wave physics and cymatics as interactive scientific visualizations.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ FEATURES ══ -->
+<section class="content" id="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag"><span class="dot"></span>Capabilities</div>
+      <h2 class="section-title">Everything You Need<br>to <span class="rainbow">Create</span></h2>
+    </div>
+    <div class="feat-sections">
+
+      <div class="feat-block reveal">
+        <div class="feat-text">
+          <span class="feat-label fl-art">🎨 Generative Art</span>
+          <h3 class="feat-h">Stunning <span class="orange">Abstract</span> Visuals</h3>
+          <p class="feat-desc">Create abstract visuals, symmetrical patterns, and dynamic wave structures in real time. Every parameter change opens a new universe of form and colour.</p>
+          <ul class="feat-list">
+            <li><strong>Cymatics patterns</strong> — Chladni figures, nodal lines and resonant geometries</li>
+            <li><strong>Faraday wave</strong> simulation on liquid surfaces</li>
+            <li><strong>Symmetrical structures</strong> with adjustable rotational order</li>
+            <li><strong>Infinite unique combinations</strong> of patterns and shapes</li>
+          </ul>
+        </div>
+        <div class="feat-canvas-wrap"><canvas id="cvArt" width="480" height="480"></canvas></div>
+      </div>
+
+      <div class="feat-block rev reveal">
+        <div class="feat-text">
+          <span class="feat-label fl-ctrl">⚙️ Wave Control</span>
+          <h3 class="feat-h">Full <span class="blue">Parameter</span> Control</h3>
+          <p class="feat-desc">Drag sliders to sculpt wave behaviour in real time. Smooth, responsive feedback — every adjustment is instant.</p>
+          <ul class="feat-list">
+            <li><strong>Interactive sliders</strong> for frequency, amplitude, symmetry, speed</li>
+            <li><strong>Wave interference</strong> — constructive and destructive patterns</li>
+            <li><strong>Resonance simulation</strong> — find the frequencies that sing</li>
+            <li><strong>Smooth real-time</strong> visual feedback at 60 FPS</li>
+          </ul>
+        </div>
+        <div class="feat-canvas-wrap"><canvas id="cvCtrl" width="480" height="480"></canvas></div>
+      </div>
+
+      <div class="feat-block reveal">
+        <div class="feat-text">
+          <span class="feat-label fl-exp">💾 Export &amp; Presets</span>
+          <h3 class="feat-h">Save Your <span class="purple">Creations</span></h3>
+          <p class="feat-desc">Your best patterns deserve to be preserved. Export in full resolution and build your own library of generative artworks.</p>
+          <ul class="feat-list">
+            <li><strong>High-resolution image export</strong> — print-ready quality</li>
+            <li><strong>Save and load presets</strong> — return to favourite configurations</li>
+            <li><strong>Build a collection</strong> of generative artworks</li>
+            <li>Ideal for <strong>art projects</strong> and creative workflows</li>
+          </ul>
+        </div>
+        <div class="feat-canvas-wrap"><canvas id="cvExp" width="480" height="480"></canvas></div>
+      </div>
+
+      <div class="feat-block rev reveal">
+        <div class="feat-text">
+          <span class="feat-label fl-edu">🎓 Educational</span>
+          <h3 class="feat-h">Learn Through <span class="teal">Beauty</span></h3>
+          <p class="feat-desc">Understand complex physics through direct visual exploration. See wave equations become art.</p>
+          <ul class="feat-list">
+            <li><strong>Wave physics</strong> — interference, standing waves, resonance</li>
+            <li><strong>Cymatics</strong> — the geometry of sound made visible</li>
+            <li><strong>Mathematical patterns</strong> — from equations to aesthetics</li>
+            <li>Useful for <strong>students, educators</strong> and physics enthusiasts</li>
+          </ul>
+        </div>
+        <div class="feat-canvas-wrap"><canvas id="cvEdu" width="480" height="480"></canvas></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ SCREENSHOTS ══ -->
+<section class="content" id="screenshots" style="background:var(--bg2);">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag"><span class="dot"></span>Gallery</div>
+      <h2 class="section-title">Every Frequency<br>a Unique <span class="rainbow">Fingerprint</span></h2>
+    </div>
+    <div class="screens-grid">
+      <div class="screen-wrap reveal d1">
+        <img src="https://play-lh.googleusercontent.com/tt3fc3-k62_0x4A4bW_1_4ZFL3Uww4kRR4kgNObCtu3pWyMMxkRgFEKgEEDtdwxtr2rq4DmwnlizMiXYvSO3UQ=w526-h296" alt="Wave Art">
+        <div class="screen-cap">Real-Time Wave Art</div>
+      </div>
+      <div class="screen-wrap reveal d2">
+        <img src="https://play-lh.googleusercontent.com/k_K7XKwlXcxc7j8z8VAlcvx7FEPYPhDiLSyRT_jCismCJKtd7Q3bqCnM8VDEpt8lW0U7EPbqS7bEjjSNFu90gw=w526-h296" alt="Parameter Control">
+        <div class="screen-cap">Parameter Control</div>
+      </div>
+      <div class="screen-wrap reveal d3">
+        <img src="https://play-lh.googleusercontent.com/ORDHp-RqHhdXlznTXdLK-3wquQ95aW5ha9mvHjOyZy_R1CK-zRVFcOoouDLBEQQAL-SWukpDEqm_cqVRoOW0aw=w526-h296" alt="Interference">
+        <div class="screen-cap">Wave Interference</div>
+      </div>
+      <div class="screen-wrap reveal d4">
+        <img src="https://play-lh.googleusercontent.com/DQJhd0rLCXxmCyigzG7-lD_lYYwQWTzsR_0T-C_fcYoULALNiIR6Egbc-NfSeCeWFbLQCOutk0HU_fKHWQhzVg=w526-h296" alt="Chladni">
+        <div class="screen-cap">Chladni Figures</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ PREMIUM ══ -->
+<section class="content" id="premium">
+  <div class="container">
+    <div class="premium-inner">
+      <div class="reveal">
+        <div class="section-tag" style="justify-content:center;"><span class="dot"></span>Premium Experience</div>
+        <h2 class="section-title">Pure Creativity.<br><span class="rainbow">Zero Compromise.</span></h2>
+        <p style="color:var(--text2);font-size:.97rem;max-width:500px;margin:0 auto;line-height:1.8;">
+          A clean, focused environment for creativity — no distractions, just you and the waves.
+        </p>
+      </div>
+      <div class="prem-pills reveal">
+        <div class="prem-pill"><span class="pi">🚫</span><span>No Ads</span></div>
+        <div class="prem-pill"><span class="pi">🔁</span><span>No Subscriptions</span></div>
+        <div class="prem-pill"><span class="pi">💳</span><span>One-Time Purchase</span></div>
+        <div class="prem-pill"><span class="pi">🔒</span><span>Zero Data Collected</span></div>
+        <div class="prem-pill"><span class="pi">✅</span><span>Rated 3+</span></div>
+      </div>
+      <div class="reveal">
+        <div class="price-card">
+          <div class="price-lbl">One-time purchase</div>
+          <div class="price-num">€0.99</div>
+          <div class="price-note">Yours forever — no recurring charges.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ══ DOWNLOAD ══ -->
+<section class="content" id="download">
+  <div class="container">
+    <p class="dl-pre reveal">Available now</p>
+    <h2 class="dl-title reveal">
+      <span class="white">Ready to See the</span>
+      <span class="rainbow">Shape of Sound?</span>
+    </h2>
+    <p class="dl-sub reveal">Download for Android on Google Play.</p>
+    <p class="dl-note reveal">No Ads · No Subscriptions · One-Time Purchase</p>
+    <div class="reveal">
+      <a class="play-badge" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3.5L13.5 12L3 20.5V3.5Z" fill="#EA4335"/>
+          <path d="M3 3.5L13.5 12L8.5 17L3 3.5Z" fill="#FBBC04"/>
+          <path d="M13.5 12L20.5 7.5L8.5 7L13.5 12Z" fill="#4285F4"/>
+          <path d="M13.5 12L20.5 16.5L8.5 17L13.5 12Z" fill="#34A853"/>
+        </svg>
+        <div class="play-badge-text">
+          <div class="top">GET IT ON</div>
+          <div class="name">Google Play</div>
+        </div>
+      </a>
+    </div>
+    <div class="stats-strip reveal">
+      <div class="stat"><span class="stat-n">60</span><span class="stat-l">FPS simulation</span></div>
+      <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Unique patterns</span></div>
+      <div class="stat"><span class="stat-n">0</span><span class="stat-l">Data collected</span></div>
+      <div class="stat"><span class="stat-n">€0.99</span><span class="stat-l">One-time</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
 <footer>
-    © 2026 Cymatics Studio Lab — Germano Pozzati
+  <p>© 2026 Germano Pozzati · Cymatics Studio Lab · Inspired by Faraday &amp; Jenny</p>
+  <div class="footer-links">
+    <a href="https://cymaticstudiolab.netlify.app/privacy" target="_blank">Privacy Policy</a>
+    <a href="/cdn-cgi/l/email-protection#8be8f2e6eaffe2e8f8fffeefe2e4e7eae9cbece6eae2e7a5e8e4e6">Support</a>
+    <a href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">Google Play</a>
+  </div>
 </footer>
 
-</body>
-</html>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══════════════════════════════════════════════
+   CYMATICS RENDERER — same engine as v4/v5
+   ═══════════════════════════════════════════════ */
+function lerp3(a,b,s){return[a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s,a[2]+(b[2]-a[2])*s];}
 
+const PAL_MAIN=[
+  [0,0,0],[8,4,20],[20,12,70],[35,25,110],
+  [50,45,155],[70,65,185],[100,95,200],[80,50,110],
+  [120,50,30],[160,80,10],[200,130,5],[240,200,20],
+  [255,240,80],[255,252,200],[230,220,255],[255,255,255],
+];
+function palMain(n){
+  const st=PAL_MAIN.length-1,idx=Math.min(n*st,st-.001),lo=Math.floor(idx),hi=Math.ceil(idx);
+  return lerp3(PAL_MAIN[lo],PAL_MAIN[hi],idx-lo);
+}
+const PAL_BLUE=[
+  [0,0,0],[4,8,25],[10,20,80],[20,50,140],
+  [30,90,190],[40,130,220],[60,170,240],[50,100,160],
+  [80,40,120],[140,30,60],[200,120,10],[240,195,15],
+  [255,238,70],[255,252,190],[220,225,255],[255,255,255],
+];
+function palBlue(n){
+  const st=PAL_BLUE.length-1,idx=Math.min(n*st,st-.001),lo=Math.floor(idx),hi=Math.ceil(idx);
+  return lerp3(PAL_BLUE[lo],PAL_BLUE[hi],idx-lo);
+}
+
+function cymVal(px,py,cx,cy,nodes,t){
+  let s=0;
+  for(const nd of nodes){
+    const dx=px-(cx+nd.rx),dy=py-(cy+nd.ry),d=Math.sqrt(dx*dx+dy*dy);
+    s+=nd.a*Math.sin(d*nd.k-t*nd.s+nd.ph);
+  }
+  const dr=Math.sqrt((px-cx)*(px-cx)+(py-cy)*(py-cy));
+  s+=0.6*Math.sin(dr*.038-t*1.5);
+  return s/(nodes.length+.6);
+}
+function make4fold(cx,cy,R,k,s,a,ph=0){
+  return[0,Math.PI/2,Math.PI,Math.PI*1.5].map(ang=>({rx:R*Math.cos(ang),ry:R*Math.sin(ang),k,s,a,ph}));
+}
+function make8fold(cx,cy,R,k,s,a){
+  return Array.from({length:8},(_,i)=>({rx:R*Math.cos(i*Math.PI/4),ry:R*Math.sin(i*Math.PI/4),k,s,a,ph:0}));
+}
+function clipCircle(ctx,cx,cy,r){ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();}
+function drawRing(ctx,cx,cy,r){
+  ctx.restore();
+  const gr=ctx.createRadialGradient(cx,cy,r-10,cx,cy,r+6);
+  gr.addColorStop(0,'rgba(255,160,0,0.5)');gr.addColorStop(.5,'rgba(255,160,0,0.2)');gr.addColorStop(1,'rgba(255,160,0,0)');
+  ctx.strokeStyle=gr;ctx.lineWidth=12;
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.stroke();
+}
+function makeRenderer(id,nodesFn,palFn,res,speed){
+  const cv=document.getElementById(id);if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width,H=cv.height,cx=W/2,cy=H/2,clipR=Math.min(W,H)/2-3;
+  let t=0;
+  function render(){
+    const nodes=nodesFn(cx,cy);
+    ctx.clearRect(0,0,W,H);clipCircle(ctx,cx,cy,clipR);
+    ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+    for(let py=0;py<H;py+=res){
+      for(let px=0;px<W;px+=res){
+        const dx=px-cx,dy=py-cy;
+        if(dx*dx+dy*dy>clipR*clipR+res*2)continue;
+        const v=cymVal(px,py,cx,cy,nodes,t);
+        const vS=Math.tanh(v*1.6)/Math.tanh(1.6),n=(vS+1)*.5;
+        const[r,g,b]=palFn(n);
+        ctx.fillStyle=`rgb(${r|0},${g|0},${b|0})`;
+        ctx.fillRect(px,py,res,res);
+      }
+    }
+    drawRing(ctx,cx,cy,clipR);
+    t+=speed;requestAnimationFrame(render);
+  }
+  render();
+}
+
+/* HERO */
+(function(){
+  const c=document.getElementById('heroCanvas');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const ctx=c.getContext('2d');let t=0;
+  function render(){
+    const W=c.width,H=c.height,res=6,cx=W/2,cy=H/2;
+    const R=Math.min(W,H)*.32,k=.022,s=2.0;
+    const nodes=[
+      {rx:R,ry:0,k,s,a:1,ph:0},{rx:-R,ry:0,k,s,a:1,ph:0},
+      {rx:0,ry:R,k,s,a:1,ph:0},{rx:0,ry:-R,k,s,a:1,ph:0},
+      {rx:R*.7,ry:R*.7,k:k*.9,s:s*1.1,a:.7,ph:Math.PI/4},
+      {rx:-R*.7,ry:R*.7,k:k*.9,s:s*1.1,a:.7,ph:Math.PI/4},
+      {rx:R*.7,ry:-R*.7,k:k*.9,s:s*1.1,a:.7,ph:Math.PI/4},
+      {rx:-R*.7,ry:-R*.7,k:k*.9,s:s*1.1,a:.7,ph:Math.PI/4},
+    ];
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+    for(let py=0;py<H;py+=res){
+      for(let px=0;px<W;px+=res){
+        const v=cymVal(px,py,cx,cy,nodes,t);
+        const vS=Math.tanh(v*1.5)/Math.tanh(1.5),n=(vS+1)*.5;
+        const[r,g,b]=palMain(n);
+        ctx.fillStyle=`rgba(${r|0},${g|0},${b|0},0.45)`;
+        ctx.fillRect(px,py,res,res);
+      }
+    }
+    t+=.022;requestAnimationFrame(render);
+  }
+  render();
+})();
+
+/* Feature canvases */
+makeRenderer('cvArt',(cx,cy)=>{const R=cx*.55;return[...make4fold(cx,cy,R,.026,2.1,1.0),...make4fold(cx,cy,R*.52,.038,3.2,.5,Math.PI/4)];},palMain,3,.026);
+makeRenderer('cvCtrl',(cx,cy)=>[...make8fold(cx,cy,cx*.5,.024,1.9,1.0)],palBlue,3,.02);
+makeRenderer('cvExp',(cx,cy)=>Array.from({length:6},(_,i)=>({rx:cx*.52*Math.cos(i*Math.PI/3),ry:cx*.52*Math.sin(i*Math.PI/3),k:.027,s:2.2,a:1,ph:0})),palMain,3,.023);
+makeRenderer('cvEdu',(cx,cy)=>[...make4fold(cx,cy,cx*.56,.03,1.6,1.0),{rx:0,ry:0,k:.02,s:1.2,a:.4,ph:0}],palBlue,3,.018);
+
+/* Scroll reveal */
+const obs=new IntersectionObserver(entries=>{
+  entries.fo
