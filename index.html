@@ -331,19 +331,22 @@ h2.section-title .orange{color:var(--orange);}
 
 /* ══ SCREENSHOTS ══ */
 #screenshots{background:var(--bg2);}
-.screens-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem;}
+.screens-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.5rem;}
 @media(max-width:800px){.screens-grid{grid-template-columns:repeat(2,1fr);}}
 .screen-wrap{
-  position:relative;border-radius:12px;overflow:hidden;
+  position:relative;border-radius:16px;overflow:hidden;
   border:1px solid var(--border2);
   transition:transform .25s,box-shadow .25s,border-color .25s;cursor:pointer;
+  /* phone aspect ratio */
+  aspect-ratio: 9/19.5;
+  background:#000;
 }
 .screen-wrap:hover{
   transform:translateY(-6px);
   box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 30px rgba(255,140,0,.15);
   border-color:rgba(255,140,0,.3);
 }
-.screen-wrap img{width:100%;display:block;}
+.screen-wrap img{width:100%;height:100%;display:block;object-fit:cover;object-position:top;}
 .screen-cap{
   position:absolute;bottom:0;left:0;right:0;
   padding:.6rem .8rem;
@@ -464,7 +467,7 @@ footer a:hover{color:#fff;}
 <!-- ══ NAV ══ -->
 <nav>
   <a class="logo-wrap" href="#">
-    <img class="logo-icon" src="/Icona-512.png" alt="icon">
+    <img class="logo-icon" src="/mnt/user-data/uploads/Icona-512.png" alt="icon">
     <div class="logo-text">
       <div class="l1">Cymatics</div>
       <div class="l2">Studio Lab</div>
@@ -485,7 +488,7 @@ footer a:hover{color:#fff;}
 
   <div class="hero-inner">
     <!-- Real app icon -->
-    <img class="hero-logo" src="/Icona-512.png" alt="Cymatics Studio Lab icon">
+    <img class="hero-logo" src="/mnt/user-data/uploads/Icona-512.png" alt="Cymatics Studio Lab icon">
 
     <h1 class="hero-title">
       <span class="row1">Cymatics</span>
@@ -547,7 +550,7 @@ footer a:hover{color:#fff;}
         </div>
       </div>
       <div class="about-img-wrap reveal d2">
-        <img src="/base-AppWeb1.jpg" alt="Cymatics wave pattern">
+        <img src="/mnt/user-data/uploads/base-AppWeb5.jpg" alt="Cymatics wave pattern">
       </div>
     </div>
   </div>
@@ -594,7 +597,7 @@ footer a:hover{color:#fff;}
             <li><strong>Infinite unique combinations</strong> of patterns and shapes</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><img src="/base-AppWeb5.jpg" alt="Generative Art"></div>
+        <div class="feat-canvas-wrap"><img src="/mnt/user-data/uploads/base-AppWeb1.jpg" alt="Generative Art"></div>
       </div>
 
       <div class="feat-block rev reveal">
@@ -609,7 +612,7 @@ footer a:hover{color:#fff;}
             <li><strong>Smooth real-time</strong> visual feedback at 60 FPS</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><img src="/base-AppWeb2.jpg" alt="Parameter Control"></div>
+        <div class="feat-canvas-wrap"><img src="/mnt/user-data/uploads/base-AppWeb2.jpg" alt="Parameter Control"></div>
       </div>
 
       <div class="feat-block reveal">
@@ -624,7 +627,7 @@ footer a:hover{color:#fff;}
             <li>Ideal for <strong>art projects</strong> and creative workflows</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><img src="/base-AppWeb3.jpg" alt="Export"></div>
+        <div class="feat-canvas-wrap"><img src="/mnt/user-data/uploads/base-AppWeb3.jpg" alt="Export"></div>
       </div>
 
       <div class="feat-block rev reveal">
@@ -639,7 +642,7 @@ footer a:hover{color:#fff;}
             <li>Useful for <strong>students, educators</strong> and physics enthusiasts</li>
           </ul>
         </div>
-        <div class="feat-canvas-wrap"><img src="/base-AppWeb4.jpg" alt="Educational"></div>
+        <div class="feat-canvas-wrap"><img src="/mnt/user-data/uploads/base-AppWeb4.jpg" alt="Educational"></div>
       </div>
 
     </div>
@@ -657,20 +660,20 @@ footer a:hover{color:#fff;}
     </div>
     <div class="screens-grid">
       <div class="screen-wrap reveal d1">
-        <img src="https://play-lh.googleusercontent.com/tt3fc3-k62_0x4A4bW_1_4ZFL3Uww4kRR4kgNObCtu3pWyMMxkRgFEKgEEDtdwxtr2rq4DmwnlizMiXYvSO3UQ=w526-h296" alt="Wave Art">
-        <div class="screen-cap">Real-Time Wave Art</div>
+        <img src="/mnt/user-data/uploads/screen1.jpg" alt="Home Screen">
+        <div class="screen-cap">Home Screen</div>
       </div>
       <div class="screen-wrap reveal d2">
-        <img src="https://play-lh.googleusercontent.com/k_K7XKwlXcxc7j8z8VAlcvx7FEPYPhDiLSyRT_jCismCJKtd7Q3bqCnM8VDEpt8lW0U7EPbqS7bEjjSNFu90gw=w526-h296" alt="Parameter Control">
-        <div class="screen-cap">Parameter Control</div>
+        <img src="/mnt/user-data/uploads/screen2.jpg" alt="GEO Controls">
+        <div class="screen-cap">GEO Controls</div>
       </div>
       <div class="screen-wrap reveal d3">
-        <img src="https://play-lh.googleusercontent.com/ORDHp-RqHhdXlznTXdLK-3wquQ95aW5ha9mvHjOyZy_R1CK-zRVFcOoouDLBEQQAL-SWukpDEqm_cqVRoOW0aw=w526-h296" alt="Interference">
-        <div class="screen-cap">Wave Interference</div>
+        <img src="/mnt/user-data/uploads/screen3.jpg" alt="Wave Frequency">
+        <div class="screen-cap">Wave Frequency</div>
       </div>
       <div class="screen-wrap reveal d4">
-        <img src="https://play-lh.googleusercontent.com/DQJhd0rLCXxmCyigzG7-lD_lYYwQWTzsR_0T-C_fcYoULALNiIR6Egbc-NfSeCeWFbLQCOutk0HU_fKHWQhzVg=w526-h296" alt="Chladni">
-        <div class="screen-cap">Chladni Figures</div>
+        <img src="/mnt/user-data/uploads/screen4.jpg" alt="Light Settings">
+        <div class="screen-cap">Light Settings</div>
       </div>
     </div>
   </div>
