@@ -209,17 +209,7 @@ footer a{color:var(--text3);text-decoration:none;transition:color .2s;}
 footer a:hover{color:#fff;}
 .footer-links{display:flex;gap:1.5rem;}
 
-/* ── HAMBURGER ── */
-.nav-burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;cursor:pointer;flex-shrink:0;}
-.nav-burger span{display:block;width:18px;height:1.5px;background:#fff;border-radius:2px;transition:transform .3s,opacity .3s;}
-.nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:299;background:rgba(10,10,10,0.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:0;padding:6rem 2rem 3rem;}
-.nav-drawer.open{display:flex;}
-.nav-drawer a{width:100%;max-width:320px;text-align:center;padding:1.1rem 1.5rem;font-size:1.1rem;font-weight:600;letter-spacing:.04em;color:var(--text2);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.07);transition:color .2s,background .2s;}
-.nav-drawer a:first-child{border-top:1px solid rgba(255,255,255,.07);}
-.nav-drawer a:hover{color:#fff;background:rgba(255,255,255,.04);}
-.nav-drawer .drawer-cta{margin-top:1.5rem;width:100%;max-width:320px;background:#fff;color:#000;border-radius:100px;border:none;font-weight:700;}
-.drawer-close{position:absolute;top:1.2rem;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--text2);width:38px;height:38px;display:flex;align-items:center;justify-content:center;}
-@media(max-width:760px){.nav-back{display:none;}.nav-burger{display:flex;}}
+
 </style>
 </head>
 <body>
@@ -239,18 +229,7 @@ footer a:hover{color:#fff;}
     </svg>
     Back to Home
   </a>
-  <button class="nav-burger" id="burgerBtn" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="nav-drawer" id="navDrawer">
-  <button class="drawer-close" id="drawerClose">✕</button>
-  <a href="index.html" onclick="closeDrawer()">Home</a>
-  <a href="manual.html" onclick="closeDrawer()">Manual</a>
-  <a href="contacts.html" onclick="closeDrawer()">Contacts</a>
-  <a class="drawer-cta" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">Get the App</a>
-</div>
-
 <!-- HERO -->
 <div class="manual-hero">
   <div class="hero-tag">⬡ User Guide</div>
@@ -425,14 +404,5 @@ footer a:hover{color:#fff;}
   </div>
 </footer>
 
-<script>
-const burgerBtn=document.getElementById('burgerBtn');
-const navDrawer=document.getElementById('navDrawer');
-const drawerClose=document.getElementById('drawerClose');
-function openDrawer(){navDrawer.classList.add('open');document.body.style.overflow='hidden';}
-function closeDrawer(){navDrawer.classList.remove('open');document.body.style.overflow='';}
-burgerBtn.addEventListener('click',openDrawer);
-drawerClose.addEventListener('click',closeDrawer);
-navDrawer.addEventListener('click',function(e){if(e.target===navDrawer)closeDrawer();});
-</script></body>
+</body>
 </html>
