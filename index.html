@@ -60,13 +60,13 @@ body{
 nav{
   position:fixed;top:0;left:0;right:0;z-index:300;
   display:flex;justify-content:space-between;align-items:center;
-  padding:1.1rem 2.5rem;
+  padding:1.1rem 2rem;
   background:rgba(10,10,10,0.88);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border2);
 }
 
-/* logo — matches app: CYMATICS white, STUDIO LAB rainbow */
+/* logo */
 .logo-wrap{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
 .logo-icon{width:32px;height:32px;flex-shrink:0;border-radius:8px;object-fit:contain;}
 .logo-text{font-size:.88rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1;}
@@ -76,6 +76,7 @@ nav{
   background-clip:text;
 }
 
+/* desktop nav links */
 .nav-right{display:flex;align-items:center;gap:1.5rem;}
 .nav-link{font-size:.78rem;font-weight:500;color:var(--text2);text-decoration:none;
   letter-spacing:.02em;transition:color .2s;}
@@ -88,7 +89,66 @@ nav{
   white-space:nowrap;
 }
 .nav-cta:hover{opacity:.92;transform:scale(1.02);}
-@media(max-width:600px){.nav-right .nav-link{display:none;}}
+
+/* hamburger button — hidden on desktop */
+.nav-burger{
+  display:none;
+  flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;width:38px;height:38px;
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border2);
+  border-radius:8px;cursor:pointer;
+  flex-shrink:0;
+}
+.nav-burger span{
+  display:block;width:18px;height:1.5px;
+  background:#fff;border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+
+/* mobile drawer */
+.nav-drawer{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  z-index:299;
+  background:rgba(10,10,10,0.97);
+  backdrop-filter:blur(20px);
+  flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0;
+  padding:6rem 2rem 3rem;
+}
+.nav-drawer.open{display:flex;}
+.nav-drawer a{
+  width:100%;max-width:320px;
+  text-align:center;
+  padding:1.1rem 1.5rem;
+  font-size:1.1rem;font-weight:600;letter-spacing:.04em;
+  color:var(--text2);text-decoration:none;
+  border-bottom:1px solid var(--border2);
+  transition:color .2s,background .2s;
+}
+.nav-drawer a:first-child{border-top:1px solid var(--border2);}
+.nav-drawer a:hover{color:#fff;background:rgba(255,255,255,.04);}
+.nav-drawer .drawer-cta{
+  margin-top:1.5rem;width:100%;max-width:320px;
+  background:var(--btn-primary);color:#000;
+  border-radius:100px;border:none;font-weight:700;
+}
+.nav-drawer .drawer-cta:hover{background:#eee;}
+/* close button */
+.drawer-close{
+  position:absolute;top:1.2rem;right:1.5rem;
+  background:none;border:none;cursor:pointer;
+  font-size:1.5rem;color:var(--text2);
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+@media(max-width:760px){
+  .nav-right{ display:none; }
+  .nav-burger{ display:flex; }
+}
 
 /* ══ HERO ══ */
 #hero{
@@ -495,7 +555,22 @@ footer a:hover{color:#fff;}
     <a class="nav-link" href="contacts.html">Contacts</a>
     <a class="nav-cta" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">Get the App</a>
   </div>
+  <!-- hamburger -->
+  <button class="nav-burger" id="burgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- mobile drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="drawer-close" id="drawerClose">✕</button>
+  <a href="#about"    onclick="closeDrawer()">Science</a>
+  <a href="#features" onclick="closeDrawer()">Features</a>
+  <a href="#screenshots" onclick="closeDrawer()">Gallery</a>
+  <a href="manual.html">Manual</a>
+  <a href="contacts.html">Contacts</a>
+  <a class="drawer-cta" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">Get the App</a>
+</div>
 
 <!-- ══ HERO ══ -->
 <section id="hero">
@@ -893,4 +968,41 @@ function makeRenderer(id,nodesFn,palFn,res,speed){
         ctx.fillRect(px,py,res,res);
       }
     }
-    t+=.022
+    ;requestAnimationFrame(render);
+  }
+  render();
+})();
+
+/* ── HAMBURGER MENU ── */
+const burgerBtn = document.getElementById('burgerBtn');
+const navDrawer = document.getElementById('navDrawer');
+const drawerClose = document.getElementById('drawerClose');
+
+function openDrawer(){
+  navDrawer.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer(){
+  navDrawer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+burgerBtn.addEventListener('click', openDrawer);
+drawerClose.addEventListener('click', closeDrawer);
+// close on backdrop click
+navDrawer.addEventListener('click', function(e){
+  if(e.target === navDrawer) closeDrawer();
+});
+
+/* ── SCROLL REVEAL ── */
+if('IntersectionObserver' in window){
+  document.querySelectorAll('.reveal').forEach(el=>{
+    el.classList.add('animate');
+  });
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('animate');e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:.05,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+</script>
+</body>
+</html>
