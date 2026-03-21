@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacts – Cymatics Studio Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a; --bg2:#111115; --card:#1a1a22; --card2:#141418;
+  --border:rgba(255,255,255,0.1); --border2:rgba(255,255,255,0.07);
+  --rainbow:linear-gradient(90deg,#ff8c00 0%,#ff5500 10%,#cc44cc 30%,#8855ff 50%,#44aaff 70%,#22ddcc 90%,#44ffcc 100%);
+  --orange:#ff8c00; --orange-glow:rgba(255,140,0,.35);
+  --text:#ffffff; --text2:#aaaacc; --text3:#666677;
+  --gG:rgba(245,200,66,.5);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 2.5rem;
+  background:rgba(10,10,10,0.88);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+}
+.logo-wrap{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.logo-icon{width:32px;height:32px;flex-shrink:0;border-radius:8px;object-fit:contain;}
+.logo-text{font-size:.88rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1;}
+.logo-text .l1{color:#fff;}
+.logo-text .l2{background:var(--rainbow);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-back{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.78rem;font-weight:600;color:var(--text2);
+  text-decoration:none;letter-spacing:.02em;
+  transition:color .2s;
+}
+.nav-back:hover{color:#fff;}
+.nav-back svg{width:16px;height:16px;opacity:.7;}
+
+/* PAGE */
+.page{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:8rem 1.5rem 5rem;
+  position:relative;
+  overflow:hidden;
+}
+
+/* subtle bg glow */
+.page::before{
+  content:'';position:absolute;
+  top:30%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(255,140,0,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.card{
+  width:100%;max-width:560px;
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:20px;
+  padding:3rem 3rem;
+  position:relative;
+  box-shadow:0 0 80px rgba(0,0,0,.5), 0 0 0 1px rgba(255,140,0,.05);
+  text-align:center;
+}
+
+/* top accent line */
+.card::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,140,0,.5),transparent);
+}
+
+/* avatar / icon */
+.creator-icon{
+  width:96px;height:96px;
+  border-radius:50%;
+  overflow:hidden;
+  margin:0 auto 1.8rem;
+  border:2px solid rgba(255,140,0,.3);
+  box-shadow:0 0 30px rgba(255,140,0,.2);
+}
+.creator-icon img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* role tag */
+.role-tag{
+  display:inline-block;
+  font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--orange);
+  background:rgba(255,140,0,.1);
+  border:1px solid rgba(255,140,0,.25);
+  border-radius:100px;
+  padding:.28rem .9rem;
+  margin-bottom:1rem;
+}
+
+/* name */
+.creator-name{
+  font-size:2rem;font-weight:800;letter-spacing:-.02em;
+  line-height:1.1;margin-bottom:.5rem;
+  color:#fff;
+}
+
+/* bio */
+.creator-bio{
+  font-size:.95rem;color:var(--text2);line-height:1.8;
+  max-width:400px;margin:0 auto 2.5rem;
+}
+.creator-bio strong{color:#fff;font-weight:600;}
+
+/* divider */
+.divider{
+  height:1px;
+  background:var(--border2);
+  margin:2rem 0;
+}
+
+/* contact rows */
+.contact-list{
+  display:flex;flex-direction:column;gap:.9rem;
+  text-align:left;
+}
+
+.contact-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.2rem;
+  background:var(--card2);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  text-decoration:none;
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.contact-item:hover{
+  border-color:rgba(255,140,0,.35);
+  background:rgba(255,140,0,.05);
+  transform:translateX(4px);
+}
+
+.contact-icon{
+  width:42px;height:42px;flex-shrink:0;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+}
+.ci-email{background:rgba(255,140,0,.12);}
+.ci-fb{background:rgba(24,119,242,.15);}
+
+.contact-info{flex:1;min-width:0;}
+.contact-label{
+  font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:.2rem;
+}
+.contact-value{
+  font-size:.9rem;font-weight:600;color:#fff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.contact-arrow{
+  color:var(--text3);flex-shrink:0;
+  transition:color .2s,transform .2s;
+}
+.contact-item:hover .contact-arrow{color:var(--orange);transform:translateX(3px);}
+
+/* back to app button */
+.back-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
+  margin-top:2.5rem;
+  width:100%;
+  background:#fff;color:#000;
+  padding:.95rem 2rem;border-radius:100px;
+  font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(255,255,255,.12);
+  transition:opacity .2s,transform .2s;
+}
+.back-btn:hover{opacity:.92;transform:translateY(-2px);}
+
+/* footer */
+footer{
+  padding:1.8rem 2.5rem;
+  border-top:1px solid var(--border2);
+  text-align:center;
+}
+footer p{font-size:.7rem;color:var(--text3);}
+footer a{color:var(--text3);text-decoration:none;transition:color .2s;}
+footer a:hover{color:#fff;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo-wrap" href="index.html">
+    <img class="logo-icon" src="/Icona-512.png" alt="icon">
+    <div class="logo-text">
+      <div class="l1">Cymatics</div>
+      <div class="l2">Studio Lab</div>
+    </div>
+  </a>
+  <a class="nav-back" href="index.html">
+    <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+  <div class="card">
+
+    <!-- icon as avatar -->
+    <div class="creator-icon">
+      <img src="/Icona-512.png" alt="Cymatics Studio Lab">
+    </div>
+
+    <div class="role-tag">⬡ Creator &amp; Developer</div>
+
+    <h1 class="creator-name">Germano Pozzati</h1>
+
+    <p class="creator-bio">
+      Independent developer and creator of <strong>Cymatics Studio Lab</strong> — a real-time wave simulation and generative art tool inspired by the physics of sound and the work of Faraday &amp; Jenny.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="contact-list">
+
+      <!-- Email -->
+      <a class="contact-item" href="mailto:cymaticstudiolab@gmail.com">
+        <div class="contact-icon ci-email">📧</div>
+        <div class="contact-info">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">cymaticstudiolab@gmail.com</div>
+        </div>
+        <svg class="contact-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+      <!-- Facebook -->
+      <a class="contact-item" href="https://www.facebook.com/groups/698462863091251/" target="_blank" rel="noopener">
+        <div class="contact-icon ci-fb">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="#1877F2" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+          </svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-label">Facebook Group</div>
+          <div class="contact-value">Cymatics Studio Lab Community</div>
+        </div>
+        <svg class="contact-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </div>
+
+    <a class="back-btn" href="index.html">← Back to Home</a>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Germano Pozzati · <a href="index.html">Cymatics Studio Lab</a></p>
+</footer>
+
+</body>
+</html>
