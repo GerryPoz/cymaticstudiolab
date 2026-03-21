@@ -177,7 +177,7 @@ nav{
   opacity:0;animation:fadeUp .8s .8s forwards;
 }
 
-/* Primary pill button — white, exactly like "GET IT ON Google Play" */
+/* Primary pill button — white, exactly like "START SIMULATOR" */
 .btn-primary-pill{
   display:flex;align-items:center;justify-content:center;gap:.6rem;
   width:100%;
@@ -201,6 +201,19 @@ nav{
   transition:background .2s,border-color .2s,transform .2s;
 }
 .btn-secondary-pill:hover{background:#22222e;border-color:rgba(255,255,255,.2);transform:translateY(-2px);}
+
+/* Google Play badge in hero — full width like original button */
+.hero-play-badge{
+  width:100%;
+  justify-content:center;
+  border-radius:100px;
+  padding:1rem 2rem;
+  font-size:1rem;
+  box-shadow:0 4px 30px rgba(255,255,255,.15);
+}
+.hero-play-badge .top{font-size:.65rem;}
+.hero-play-badge .name{font-size:1.05rem;font-weight:800;}
+.hero-play-badge svg{width:26px;height:26px;}
 
 .scroll-hint{
   position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:3;
@@ -505,8 +518,17 @@ footer a:hover{color:#fff;}
 
     <!-- CTA group — mirrors app layout exactly -->
     <div class="hero-cta-group">
-      <a class="btn-primary-pill" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">
-        START SIMULATOR
+      <a class="play-badge hero-play-badge" href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro" target="_blank">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3.5L13.5 12L3 20.5V3.5Z" fill="#EA4335"/>
+          <path d="M3 3.5L13.5 12L8.5 17L3 3.5Z" fill="#FBBC04"/>
+          <path d="M13.5 12L20.5 7.5L8.5 7L13.5 12Z" fill="#4285F4"/>
+          <path d="M13.5 12L20.5 16.5L8.5 17L13.5 12Z" fill="#34A853"/>
+        </svg>
+        <div class="play-badge-text">
+          <div class="top">GET IT ON</div>
+          <div class="name">Google Play</div>
+        </div>
       </a>
       <div class="btn-row">
         <a class="btn-secondary-pill" href="#about">About Us</a>
@@ -591,7 +613,7 @@ footer a:hover{color:#fff;}
           <h3 class="feat-h">Stunning <span class="orange">Abstract</span> Visuals</h3>
           <p class="feat-desc">Create abstract visuals, symmetrical patterns, and dynamic wave structures in real time. Every parameter change opens a new universe of form and colour.</p>
           <ul class="feat-list">
-            <li><strong>Cymatics patterns</strong> — Chladni figures, nodal lines and resonant geometries</li>
+            <li><strong>Cymatics patterns</strong> — Faraday figures, nodal lines and resonant geometries</li>
             <li><strong>Faraday wave</strong> simulation on liquid surfaces</li>
             <li><strong>Symmetrical structures</strong> with adjustable rotational order</li>
             <li><strong>Infinite unique combinations</strong> of patterns and shapes</li>
