@@ -168,6 +168,15 @@ body {
   margin-top: 34px;
 }
 
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -468,7 +477,24 @@ body {
   }
 
   .nav-links {
+    position: absolute;
+    top: 68px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    flex-direction: column;
+    padding: 16px;
     display: none;
+    gap: 12px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 
   .video-card {
