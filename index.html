@@ -1,179 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cymatics Studio Lab</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cymatics Studio Lab</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
+    background: #05060a;
+    color: white;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,6,10,0.6);
+    backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+
+  .logo {
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .nav a {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 140px 20px 80px;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(120,80,255,0.25), transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(0,200,255,0.15), transparent 50%),
+      #05060a;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 3px;
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 56px;
+    max-width: 900px;
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  .sub {
+    margin-top: 20px;
+    font-size: 18px;
+    opacity: 0.7;
+    max-width: 700px;
+  }
+
+  .buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.25s;
+  }
+
+  .primary {
+    background: white;
+    color: black;
+  }
+
+  .primary:hover {
+    transform: scale(1.05);
+  }
+
+  .secondary {
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* VIDEO */
+  .video-section {
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .video-container {
+    max-width: 1000px;
+    margin: auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  video {
+    width: 100%;
+    display: block;
+  }
+
+  /* FEATURES */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .card h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .card p {
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* USE CASE */
+  .usecase {
+    text-align: center;
+    padding: 120px 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .usecase p {
+    opacity: 0.7;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 140px 20px;
+    background:
+      radial-gradient(circle at bottom, rgba(120,80,255,0.2), transparent 60%),
+      #05060a;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+    opacity: 0.4;
+  }
+</style>
 </head>
 
 <body>
 
-<div class="background-glow"></div>
-
-<header class="site-header">
-  <div class="container nav">
-
-    <div class="brand">
-      <div class="brand-icon">
-        <img src="logo.png" alt="logo">
-      </div>
-      <div class="brand-text">
-        <span>CYMATICS</span>
-        <span class="gradient-text">STUDIO LAB</span>
-      </div>
-    </div>
-
-    <button class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="nav-links" id="navMenu">
-      <a href="#features">Features</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#download">Get App</a>
-    </nav>
-
-  </div>
-</header>
-
-<main>
+<!-- NAV -->
+<div class="nav">
+  <div class="logo">CYMATICS STUDIO LAB</div>
+  <a href="#download">Download</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container hero-grid">
+  <div class="eyebrow">REAL-TIME AUDIO VISUALIZATION</div>
 
-    <div class="hero-text">
+  <h1>Turn sound into living visual experiences.</h1>
 
-      <div class="hero-badge fade-up">
-        <img src="logo.png" class="hero-icon">
-        <p class="eyebrow">Real-time · Not pre-rendered</p>
-      </div>
+  <p class="sub">
+    Cymatics Studio Lab transforms audio into cinematic visual motion in real time.
+    Built for musicians, sound designers, and digital creators.
+  </p>
 
-      <h1 class="fade-up">
-        Real-time cymatics simulation
-        <span class="gradient-text block">Turn equations into visual art</span>
-      </h1>
+  <div class="buttons">
+    <a href="#download" class="btn primary">Download App</a>
+    <a href="#demo" class="btn secondary">Watch Demo</a>
+  </div>
+</section>
 
-      <p class="hero-description fade-up">
-        Explore wave interference inspired by Faraday physics.
-        Control every parameter in real time and generate mesmerizing patterns.
-      </p>
-
-      <div class="hero-buttons fade-up">
-        <a id="download" class="btn btn-primary"
-          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          target="_blank">
-          Get it on Google Play
-        </a>
-
-        <a class="btn btn-secondary" href="#features">
-          See Features
-        </a>
-      </div>
-
-      <p class="price-note fade-up">
-        Premium app · €2.99 one-time purchase
-      </p>
-
-      <div class="trust-badges fade-up">
-        <span>✔ No ads</span>
-        <span>✔ No subscriptions</span>
-      </div>
-
-    </div>
-
-    <div class="hero-visual fade-up">
-      <div class="video-card">
-        <video autoplay muted loop playsinline poster="hero-poster.jpg">
-          <source src="hero-loop.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
+<!-- VIDEO -->
+<section class="video-section" id="demo">
+  <div class="video-container">
+    <video autoplay muted loop controls>
+      <source src="demo.mp4" type="video/mp4">
+    </video>
   </div>
 </section>
 
 <!-- FEATURES -->
-<section id="features" class="section">
-  <div class="container">
+<section class="features">
 
-    <div class="section-heading center fade-up">
-      <h2>Powerful, yet simple</h2>
-    </div>
-
-    <div class="feature-grid">
-
-      <div class="card fade-up">
-        <h3>Real-time physics</h3>
-        <p>No pre-rendering. Every pattern is generated live.</p>
-      </div>
-
-      <div class="card fade-up">
-        <h3>Total control</h3>
-        <p>Adjust frequency, amplitude and interaction instantly.</p>
-      </div>
-
-      <div class="card fade-up">
-        <h3>Create & export</h3>
-        <p>Save your creations and build your own visual library.</p>
-      </div>
-
-    </div>
-
+  <div class="card">
+    <h3>Real-time audio engine</h3>
+    <p>Instant transformation of sound into dynamic visual structures.</p>
   </div>
+
+  <div class="card">
+    <h3>Cinematic visual output</h3>
+    <p>Generate immersive visuals designed for music videos and performances.</p>
+  </div>
+
+  <div class="card">
+    <h3>Creative control system</h3>
+    <p>Shape motion, intensity, and aesthetic behavior in real time.</p>
+  </div>
+
+  <div class="card">
+    <h3>Low-latency processing</h3>
+    <p>Optimized engine built for live performance and studio workflows.</p>
+  </div>
+
 </section>
 
-<!-- GALLERY -->
-<section id="gallery" class="section">
-  <div class="container">
-
-    <div class="section-heading fade-up">
-      <h2>Hypnotic results</h2>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="gallery-item fade-up"><img src="gallery-1.jpg"></div>
-      <div class="gallery-item fade-up"><img src="gallery-2.jpg"></div>
-      <div class="gallery-item fade-up"><img src="gallery-3.jpg"></div>
-    </div>
-
-  </div>
+<!-- USE CASE -->
+<section class="usecase">
+  <h2>Built for creators</h2>
+  <p>
+    From electronic music producers to visual artists,
+    Cymatics Studio Lab bridges sound and vision into a single creative flow.
+  </p>
 </section>
 
 <!-- CTA -->
-<section class="section">
-  <div class="container">
+<section class="cta-section" id="download">
+  <h2 style="font-size:42px;">Start creating with sound & light</h2>
+  <p style="opacity:0.7; max-width:600px; margin:20px auto;">
+    Download Cymatics Studio Lab and experience audio as a visual medium.
+  </p>
 
-    <div class="final-cta fade-up">
-      <h2>Experience cymatics in real time</h2>
-
-      <a class="btn btn-primary"
-         href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-         target="_blank">
-         Download now
-      </a>
-
-      <p class="price-note">
-        €2.99 · No ads · No subscriptions
-      </p>
-
-    </div>
-
+  <div class="buttons">
+    <a href="#" class="btn primary">Download Now</a>
+    <a href="#demo" class="btn secondary">Watch Demo</a>
   </div>
 </section>
 
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-content">
-    <p>© <span id="year"></span> Cymatics Studio Lab</p>
-  </div>
+<footer>
+  © 2026 Cymatics Studio Lab. All rights reserved.
 </footer>
-
-<script src="script.js"></script>
 
 </body>
 </html>
