@@ -2,205 +2,265 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cymatics Studio Lab</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Real-time cymatics and Faraday wave simulation. Create generative art, export your creations, and explore the beauty of wave physics." />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<div class="background-glow"></div>
+  <div class="background-glow"></div>
 
-<header class="site-header">
-  <div class="container nav">
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-icon">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <div class="brand-core"></div>
+        </div>
+        <div class="brand-text">
+          <span>CYMATICS</span>
+          <span class="gradient-text">STUDIO LAB</span>
+        </div>
+      </div>
 
-    <div class="brand">
-      <div class="brand-icon">
-        <img src="logo.png" alt="logo">
-      </div>
-      <div class="brand-text">
-        <span>CYMATICS</span>
-        <span class="gradient-text">STUDIO LAB</span>
-      </div>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-light" href="#download">Get the App</a>
+      </nav>
     </div>
+  </header>
 
-    <button class="menu-toggle" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Real-time. Not pre-rendered.</p>
 
-    <nav class="nav-links" id="navMenu">
-      <a href="#features">Features</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn btn-light" href="#download">Get the App</a>
-    </nav>
+          <h1>
+            This is not animation.
+            <span class="gradient-text block">It’s real-time wave simulation.</span>
+          </h1>
 
-  </div>
-</header>
+          <p class="hero-description">
+            Create generative art inspired by cymatics and Faraday waves.
+            Control every parameter in real time, export your creations,
+            and save your favorite presets.
+          </p>
 
-<main>
+          <div class="hero-buttons">
+            <a
+              id="download"
+              class="btn btn-primary"
+              href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Get it on Google Play
+            </a>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-grid">
+            <a class="btn btn-secondary" href="#features">
+              Explore Features
+            </a>
+          </div>
 
-    <div class="hero-text">
+          <div class="trust-badges">
+            <span>✔ One-time purchase</span>
+            <span>✔ No ads</span>
+            <span>✔ No subscriptions</span>
+          </div>
 
-      <div class="hero-badge fade-up">
-        <img src="logo.png" class="hero-icon">
-        <p class="eyebrow">Real-time. Not pre-rendered.</p>
+          <div class="warning-box">
+            <strong>Photosensitivity Warning:</strong>
+            This application contains rapidly flashing lights and geometric patterns
+            which may trigger seizures in people with photosensitive epilepsy.
+            Viewer discretion is advised.
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="video-card">
+            <video autoplay muted loop playsinline poster="hero-poster.jpg">
+              <source src="hero-loop.mp4" type="video/mp4" />
+            </video>
+            <div class="video-badge">Real-time simulation</div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <h1 class="fade-up">
-        This is not animation.
-        <span class="gradient-text block">It’s real-time wave simulation.</span>
-      </h1>
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="section-label">Features</p>
+          <h2>Built for exploration</h2>
+        </div>
 
-      <p class="hero-description fade-up">
-        Create generative art inspired by cymatics and Faraday waves.
-        Control every parameter in real time and export your creations.
-      </p>
+        <div class="feature-grid">
+          <div class="card">
+            <h3>Full Parameter Control</h3>
+            <p>
+              Adjust waves, frequencies, symmetry, and behavior in real time
+              with intuitive controls.
+            </p>
+          </div>
 
-      <div class="hero-buttons fade-up">
-        <a id="download" class="btn btn-primary"
+          <div class="card">
+            <h3>Export & Presets</h3>
+            <p>
+              Save high-resolution images and build your own library of reusable
+              visual presets.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Science Meets Art</h3>
+            <p>
+              Explore the beauty of cymatics through a visual experience designed
+              for both creativity and learning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-label">Gallery</p>
+          <h2>What you can create</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="gallery-1.jpg" alt="Cymatics artwork 1" />
+          </div>
+          <div class="gallery-item">
+            <img src="gallery-2.jpg" alt="Cymatics artwork 2" />
+          </div>
+          <div class="gallery-item">
+            <img src="gallery-3.jpg" alt="Cymatics artwork 3" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT STANDS OUT -->
+    <section class="section">
+      <div class="container">
+        <div class="highlight-box">
+          <div class="highlight-grid">
+            <div>
+              <p class="section-label">Why it stands out</p>
+              <h2>A premium creative tool — not just a visual toy</h2>
+            </div>
+
+            <div class="mini-grid">
+              <div class="mini-card">
+                Designed for artists, curious minds, and anyone fascinated by the
+                hidden beauty of wave physics.
+              </div>
+              <div class="mini-card">
+                Perfect for creative inspiration, visual experimentation, and
+                educational exploration.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="container faq-container">
+        <div class="section-heading center">
+          <p class="section-label">FAQ</p>
+          <h2>Questions people actually have</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>What is Cymatics Studio Lab?</summary>
+            <p>
+              Cymatics Studio Lab is a real-time wave simulation app inspired by
+              cymatics and Faraday wave behavior. It lets you generate dynamic
+              geometric visuals by adjusting simulation parameters live.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is this pre-rendered animation?</summary>
+            <p>
+              No. The visuals are generated in real time. What you see is the
+              direct result of parameter changes inside the simulation.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I save what I create?</summary>
+            <p>
+              Yes. You can export high-resolution images and keep your favorite
+              presets for future exploration.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I pay for the app?</summary>
+            <p>
+              Cymatics Studio Lab is a one-time purchase. No subscriptions. No ads.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section final-cta-section">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Turn equations into living visuals.</h2>
+          <p>
+            A premium creative tool for artists, curious minds, and anyone
+            fascinated by the hidden beauty of wave physics.
+          </p>
+
+          <a
+            class="btn btn-primary"
+            href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download on Google Play
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Cymatics Studio Lab. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="mailto:your@email.com">Contact</a>
+        <a
           href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-          target="_blank">
-          Get it on Google Play
-        </a>
-
-        <a class="btn btn-secondary" href="#features">
-          Explore Features
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google Play
         </a>
       </div>
-
-      <p class="price-note fade-up">
-        Premium app · €2.99 one-time purchase
-      </p>
-
-      <div class="trust-badges fade-up">
-        <span>✔ No ads</span>
-        <span>✔ No subscriptions</span>
-      </div>
-
     </div>
+  </footer>
 
-    <div class="hero-visual fade-up">
-      <div class="video-card">
-        <video autoplay muted loop playsinline poster="hero-poster.jpg">
-          <source src="hero-loop.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features" class="section">
-  <div class="container">
-
-    <div class="section-heading center fade-up">
-      <h2>Built for exploration</h2>
-    </div>
-
-    <div class="feature-grid">
-
-      <div class="card fade-up">
-        <h3>Full Control</h3>
-        <p>Adjust all wave parameters in real time.</p>
-      </div>
-
-      <div class="card fade-up">
-        <h3>Export & Presets</h3>
-        <p>Save images and reuse your creations.</p>
-      </div>
-
-      <div class="card fade-up">
-        <h3>Science + Art</h3>
-        <p>Explore cymatics through visual experience.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery" class="section">
-  <div class="container">
-
-    <div class="section-heading fade-up">
-      <h2>What you can create</h2>
-    </div>
-
-    <div class="gallery-grid">
-      <div class="gallery-item fade-up"><img src="gallery-1.jpg"></div>
-      <div class="gallery-item fade-up"><img src="gallery-2.jpg"></div>
-      <div class="gallery-item fade-up"><img src="gallery-3.jpg"></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="section">
-  <div class="container">
-
-    <div class="section-heading center fade-up">
-      <h2>FAQ</h2>
-    </div>
-
-    <div class="faq-list">
-
-      <details class="faq-item fade-up">
-        <summary>What is this?</summary>
-        <p>A real-time cymatics simulation app.</p>
-      </details>
-
-      <details class="faq-item fade-up">
-        <summary>Is it real-time?</summary>
-        <p>Yes. Everything is generated live.</p>
-      </details>
-
-      <details class="faq-item fade-up">
-        <summary>Can I export?</summary>
-        <p>Yes, you can save images.</p>
-      </details>
-
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="section">
-  <div class="container">
-
-    <div class="final-cta fade-up">
-      <h2>Turn equations into art.</h2>
-      <a class="btn btn-primary"
-         href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-         target="_blank">
-         Download Now
-      </a>
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-content">
-    <p>© <span id="year"></span> Cymatics Studio Lab</p>
-    <div class="footer-links">
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="mailto:your@email.com">Contact</a>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
