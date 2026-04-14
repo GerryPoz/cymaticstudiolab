@@ -9,6 +9,8 @@
 
 <body>
 
+<div class="background-glow"></div>
+
 <header class="site-header">
   <div class="container nav">
 
@@ -17,7 +19,8 @@
         <img src="logo.png" alt="logo">
       </div>
       <div class="brand-text">
-        Cymatics Studio Lab
+        <span>CYMATICS</span>
+        <span class="gradient-text">STUDIO LAB</span>
       </div>
     </div>
 
@@ -30,7 +33,7 @@
     <nav class="nav-links" id="navMenu">
       <a href="#features">Features</a>
       <a href="#gallery">Gallery</a>
-      <a href="#download">Get the App</a>
+      <a href="#download">Get App</a>
     </nav>
 
   </div>
@@ -40,85 +43,101 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container center">
+  <div class="container hero-grid">
 
-    <div class="hero-badge fade-up">
-      <img src="logo.png" class="hero-icon">
-      <p class="eyebrow">Real-time. Not pre-rendered.</p>
+    <div class="hero-text">
+
+      <div class="hero-badge fade-up">
+        <img src="logo.png" class="hero-icon">
+        <p class="eyebrow">Real-time · Not pre-rendered</p>
+      </div>
+
+      <h1 class="fade-up">
+        Real-time cymatics simulation
+        <span class="gradient-text block">Turn equations into visual art</span>
+      </h1>
+
+      <p class="hero-description fade-up">
+        Explore wave interference inspired by Faraday physics.
+        Control every parameter in real time and generate mesmerizing patterns.
+      </p>
+
+      <div class="hero-buttons fade-up">
+        <a id="download" class="btn btn-primary"
+          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+          target="_blank">
+          Get it on Google Play
+        </a>
+
+        <a class="btn btn-secondary" href="#features">
+          See Features
+        </a>
+      </div>
+
+      <p class="price-note fade-up">
+        Premium app · €2.99 one-time purchase
+      </p>
+
+      <div class="trust-badges fade-up">
+        <span>✔ No ads</span>
+        <span>✔ No subscriptions</span>
+      </div>
+
     </div>
-
-    <h1 class="fade-up">
-      Real-time cymatics simulation
-    </h1>
-
-    <p class="hero-description fade-up">
-      Explore wave interference patterns inspired by Faraday waves.
-      Adjust parameters in real time and generate complex visual structures.
-    </p>
 
     <div class="hero-visual fade-up">
-      <video autoplay muted loop playsinline poster="hero-poster.jpg">
-        <source src="hero-loop.mp4" type="video/mp4">
-      </video>
+      <div class="video-card">
+        <video autoplay muted loop playsinline poster="hero-poster.jpg">
+          <source src="hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
-
-    <div class="hero-buttons fade-up">
-      <a id="download" class="btn btn-primary"
-        href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-        target="_blank">
-        Get it on Google Play
-      </a>
-    </div>
-
-    <p class="price-note fade-up">
-      €2.99 · One-time purchase · No ads · No subscriptions
-    </p>
 
   </div>
 </section>
 
 <!-- FEATURES -->
 <section id="features" class="section">
-  <div class="container narrow">
+  <div class="container">
 
-    <h2 class="fade-up">Features</h2>
+    <div class="section-heading center fade-up">
+      <h2>Powerful, yet simple</h2>
+    </div>
 
-    <div class="feature-list">
+    <div class="feature-grid">
 
-      <div class="fade-up">
-        <h3>Real-time simulation</h3>
-        <p>All patterns are generated dynamically, not pre-rendered.</p>
+      <div class="card fade-up">
+        <h3>Real-time physics</h3>
+        <p>No pre-rendering. Every pattern is generated live.</p>
       </div>
 
-      <div class="fade-up">
-        <h3>Full parameter control</h3>
-        <p>Adjust frequency, amplitude and interaction live.</p>
+      <div class="card fade-up">
+        <h3>Total control</h3>
+        <p>Adjust frequency, amplitude and interaction instantly.</p>
       </div>
 
-      <div class="fade-up">
-        <h3>Export images</h3>
-        <p>Save and share your generated structures.</p>
-      </div>
-
-      <div class="fade-up">
-        <h3>Preset system</h3>
-        <p>Store and reload your favorite configurations.</p>
+      <div class="card fade-up">
+        <h3>Create & export</h3>
+        <p>Save your creations and build your own visual library.</p>
       </div>
 
     </div>
+
   </div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery" class="section">
-  <div class="container narrow">
+  <div class="container">
 
-    <h2 class="fade-up">Examples</h2>
+    <div class="section-heading fade-up">
+      <h2>Hypnotic results</h2>
+    </div>
 
     <div class="gallery-grid">
-      <img src="gallery-1.jpg" class="fade-up">
-      <img src="gallery-2.jpg" class="fade-up">
-      <img src="gallery-3.jpg" class="fade-up">
+      <div class="gallery-item fade-up"><img src="gallery-1.jpg"></div>
+      <div class="gallery-item fade-up"><img src="gallery-2.jpg"></div>
+      <div class="gallery-item fade-up"><img src="gallery-3.jpg"></div>
     </div>
 
   </div>
@@ -126,15 +145,22 @@
 
 <!-- CTA -->
 <section class="section">
-  <div class="container center">
+  <div class="container">
 
-    <h2 class="fade-up">Turn equations into visual structures</h2>
+    <div class="final-cta fade-up">
+      <h2>Experience cymatics in real time</h2>
 
-    <a class="btn btn-primary fade-up"
-      href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
-      target="_blank">
-      Download the app
-    </a>
+      <a class="btn btn-primary"
+         href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+         target="_blank">
+         Download now
+      </a>
+
+      <p class="price-note">
+        €2.99 · No ads · No subscriptions
+      </p>
+
+    </div>
 
   </div>
 </section>
@@ -142,7 +168,7 @@
 </main>
 
 <footer class="site-footer">
-  <div class="container narrow">
+  <div class="container footer-content">
     <p>© <span id="year"></span> Cymatics Studio Lab</p>
   </div>
 </footer>
