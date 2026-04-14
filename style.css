@@ -463,6 +463,20 @@ body {
   color: #fff;
 }
 
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hero-icon {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  box-shadow: 0 0 18px rgba(255, 140, 0, 0.35);
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .feature-grid,
