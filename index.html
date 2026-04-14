@@ -14,112 +14,74 @@
     overflow-x: hidden;
   }
 
-  a { color: inherit; text-decoration: none; }
-
-  /* NAV */
-  .nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 18px 40px;
+  section {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: rgba(5,6,10,0.6);
-    backdrop-filter: blur(12px);
-    z-index: 10;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px;
+    position: relative;
   }
 
-  .logo {
+  h1, h2 {
+    margin: 0;
     font-weight: 600;
-    letter-spacing: 2px;
-    font-size: 14px;
-    opacity: 0.9;
+    letter-spacing: -0.02em;
   }
 
-  .nav a {
-    font-size: 14px;
-    opacity: 0.7;
+  p {
+    opacity: 0.75;
+    max-width: 720px;
+    line-height: 1.6;
   }
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 140px 20px 80px;
-    background:
-      radial-gradient(circle at 50% 20%, rgba(120,80,255,0.25), transparent 50%),
-      radial-gradient(circle at 70% 80%, rgba(0,200,255,0.15), transparent 50%),
-      #05060a;
+    background: radial-gradient(circle at 50% 30%, rgba(120,80,255,0.25), transparent 60%);
   }
 
-  .eyebrow {
-    font-size: 12px;
-    letter-spacing: 3px;
-    opacity: 0.6;
-    margin-bottom: 20px;
+  .hero h1 {
+    font-size: 64px;
   }
 
-  h1 {
-    font-size: 56px;
-    max-width: 900px;
-    margin: 0;
-    line-height: 1.05;
-  }
-
-  .sub {
+  .hero p {
     margin-top: 20px;
     font-size: 18px;
-    opacity: 0.7;
-    max-width: 700px;
   }
 
-  .buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
+  /* SCIENTIFIC SECTION */
+  .science {
+    background: #05060a;
   }
 
-  .btn {
-    padding: 14px 26px;
-    border-radius: 999px;
+  .hz {
+    font-size: 120px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7c5cff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* RANGE VISUAL */
+  .range {
+    margin-top: 40px;
     font-size: 14px;
-    font-weight: 500;
-    transition: 0.25s;
+    opacity: 0.6;
   }
 
-  .primary {
-    background: white;
-    color: black;
+  /* DEMO */
+  .demo {
+    background: radial-gradient(circle at bottom, rgba(0,200,255,0.15), transparent 60%);
   }
 
-  .primary:hover {
-    transform: scale(1.05);
-  }
-
-  .secondary {
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-
-  /* VIDEO */
-  .video-section {
-    padding: 80px 20px;
-    text-align: center;
-  }
-
-  .video-container {
-    max-width: 1000px;
-    margin: auto;
+  .video-box {
+    width: 90%;
+    max-width: 900px;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
     border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 50px 140px rgba(0,0,0,0.8);
   }
 
   video {
@@ -127,62 +89,35 @@
     display: block;
   }
 
-  /* FEATURES */
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    padding: 100px 40px;
-    max-width: 1100px;
-    margin: auto;
+  /* EXPLANATION */
+  .explore {
+    flex-direction: column;
+    gap: 20px;
   }
 
   .card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 24px;
-    backdrop-filter: blur(10px);
+    max-width: 700px;
+  }
+
+  /* FINAL CTA */
+  .cta {
+    background: radial-gradient(circle at top, rgba(120,80,255,0.2), transparent 60%);
+    flex-direction: column;
+  }
+
+  .button {
+    margin-top: 30px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: white;
+    color: black;
+    font-weight: 600;
+    display: inline-block;
     transition: 0.3s;
   }
 
-  .card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(255,255,255,0.2);
-  }
-
-  .card h3 {
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .card p {
-    opacity: 0.7;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  /* USE CASE */
-  .usecase {
-    text-align: center;
-    padding: 120px 20px;
-    max-width: 800px;
-    margin: auto;
-  }
-
-  .usecase p {
-    opacity: 0.7;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  /* CTA */
-  .cta-section {
-    text-align: center;
-    padding: 140px 20px;
-    background:
-      radial-gradient(circle at bottom, rgba(120,80,255,0.2), transparent 60%),
-      #05060a;
+  .button:hover {
+    transform: scale(1.05);
   }
 
   footer {
@@ -191,92 +126,83 @@
     font-size: 12px;
     opacity: 0.4;
   }
+
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
-<div class="nav">
-  <div class="logo">CYMATICS STUDIO LAB</div>
-  <a href="#download">Download</a>
-</div>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="eyebrow">REAL-TIME AUDIO VISUALIZATION</div>
-
-  <h1>Turn sound into living visual experiences.</h1>
-
-  <p class="sub">
-    Cymatics Studio Lab transforms audio into cinematic visual motion in real time.
-    Built for musicians, sound designers, and digital creators.
-  </p>
-
-  <div class="buttons">
-    <a href="#download" class="btn primary">Download App</a>
-    <a href="#demo" class="btn secondary">Watch Demo</a>
+  <div>
+    <h1>Cymatics Studio Lab</h1>
+    <p>
+      A scientific exploration of sound made visible through frequency-controlled cymatics.
+      From 0 to 100 Hz — pure physical resonance shaping matter and motion.
+    </p>
   </div>
 </section>
 
-<!-- VIDEO -->
-<section class="video-section" id="demo">
-  <div class="video-container">
-    <video autoplay muted loop controls>
-      <source src="demo.mp4" type="video/mp4">
-    </video>
+<!-- SCIENCE -->
+<section class="science">
+  <div>
+    <h2>Frequency becomes structure</h2>
+
+    <div class="hz">0 – 100 Hz</div>
+
+    <p class="range">
+      Controlled frequency range designed to visualize physical resonance patterns in real time.
+    </p>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features">
-
+<!-- EXPLANATION -->
+<section class="explore">
   <div class="card">
-    <h3>Real-time audio engine</h3>
-    <p>Instant transformation of sound into dynamic visual structures.</p>
+    <h2>What you are seeing</h2>
+    <p>
+      Cymatics Studio Lab is based on the principle that sound frequencies can organize matter into geometric patterns.
+      By controlling low-frequency oscillations, you can observe the emergence of structured visual behavior.
+    </p>
   </div>
 
   <div class="card">
-    <h3>Cinematic visual output</h3>
-    <p>Generate immersive visuals designed for music videos and performances.</p>
+    <h2>0–100 Hz control system</h2>
+    <p>
+      Instead of audio-to-visual conversion, the system directly manipulates frequency excitation,
+      allowing precise exploration of wave behavior in a controlled environment.
+    </p>
   </div>
-
-  <div class="card">
-    <h3>Creative control system</h3>
-    <p>Shape motion, intensity, and aesthetic behavior in real time.</p>
-  </div>
-
-  <div class="card">
-    <h3>Low-latency processing</h3>
-    <p>Optimized engine built for live performance and studio workflows.</p>
-  </div>
-
 </section>
 
-<!-- USE CASE -->
-<section class="usecase">
-  <h2>Built for creators</h2>
-  <p>
-    From electronic music producers to visual artists,
-    Cymatics Studio Lab bridges sound and vision into a single creative flow.
-  </p>
+<!-- DEMO -->
+<section class="demo">
+  <div>
+    <h2>Observe resonance in motion</h2>
+    <p>Real-time visualization of frequency-driven physical patterns.</p>
+
+    <div class="video-box">
+      <video autoplay muted loop controls>
+        <source src="demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section" id="download">
-  <h2 style="font-size:42px;">Start creating with sound & light</h2>
-  <p style="opacity:0.7; max-width:600px; margin:20px auto;">
-    Download Cymatics Studio Lab and experience audio as a visual medium.
-  </p>
+<!-- FINAL CTA -->
+<section class="cta">
+  <div>
+    <h2>Start exploring cymatic frequency</h2>
+    <p>
+      Experience controlled resonance and visualized sound physics.
+    </p>
 
-  <div class="buttons">
-    <a href="#" class="btn primary">Download Now</a>
-    <a href="#demo" class="btn secondary">Watch Demo</a>
+    <a class="button" href="#download">Download Cymatics Studio Lab</a>
   </div>
 </section>
 
 <footer>
-  © 2026 Cymatics Studio Lab. All rights reserved.
+  © 2026 Cymatics Studio Lab — All rights reserved
 </footer>
 
 </body>
