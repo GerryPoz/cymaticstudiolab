@@ -3,85 +3,72 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cymatics Studio Lab</title>
+<title>Cymatics Studio Lab — Manual</title>
 
 <style>
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif;
-    background: #05060a;
-    color: white;
-    overflow-x: hidden;
-  }
-
-  section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 120px 20px;
-    position: relative;
-  }
-
-  h1, h2 {
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  p {
-    opacity: 0.75;
-    max-width: 720px;
+    background: #07070a;
+    color: #eaeaea;
+    font-family: "SF Mono", "Courier New", monospace;
     line-height: 1.6;
   }
 
-  /* HERO */
-  .hero {
-    background: radial-gradient(circle at 50% 30%, rgba(120,80,255,0.25), transparent 60%);
+  .wrap {
+    max-width: 900px;
+    margin: auto;
+    padding: 120px 24px;
   }
 
-  .hero h1 {
-    font-size: 64px;
+  /* TYPO SYSTEM */
+  h1 {
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
   }
 
-  .hero p {
-    margin-top: 20px;
-    font-size: 18px;
+  h2 {
+    margin-top: 80px;
+    font-size: 20px;
+    font-weight: 500;
+    opacity: 0.9;
   }
 
-  /* SCIENTIFIC SECTION */
-  .science {
-    background: #05060a;
+  p {
+    font-size: 15px;
+    opacity: 0.75;
+    margin-bottom: 20px;
+  }
+
+  .label {
+    font-size: 12px;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-bottom: 10px;
   }
 
   .hz {
-    font-size: 120px;
-    font-weight: 700;
+    font-size: 64px;
+    margin: 40px 0;
     background: linear-gradient(90deg, #7c5cff, #00d4ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* RANGE VISUAL */
-  .range {
+  /* BLOCKS */
+  .block {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 40px;
     margin-top: 40px;
-    font-size: 14px;
-    opacity: 0.6;
   }
 
-  /* DEMO */
-  .demo {
-    background: radial-gradient(circle at bottom, rgba(0,200,255,0.15), transparent 60%);
-  }
-
-  .video-box {
-    width: 90%;
-    max-width: 900px;
-    border-radius: 24px;
-    overflow: hidden;
+  /* VIDEO */
+  .video {
+    margin-top: 40px;
     border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 50px 140px rgba(0,0,0,0.8);
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   video {
@@ -89,42 +76,30 @@
     display: block;
   }
 
-  /* EXPLANATION */
-  .explore {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .card {
-    max-width: 700px;
-  }
-
-  /* FINAL CTA */
+  /* CTA */
   .cta {
-    background: radial-gradient(circle at top, rgba(120,80,255,0.2), transparent 60%);
-    flex-direction: column;
+    margin-top: 120px;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    text-align: center;
   }
 
-  .button {
-    margin-top: 30px;
-    padding: 14px 28px;
-    border-radius: 999px;
-    background: white;
-    color: black;
-    font-weight: 600;
+  .btn {
     display: inline-block;
+    margin-top: 20px;
+    padding: 12px 22px;
+    border: 1px solid white;
+    border-radius: 999px;
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
     transition: 0.3s;
   }
 
-  .button:hover {
-    transform: scale(1.05);
-  }
-
-  footer {
-    text-align: center;
-    padding: 30px;
-    font-size: 12px;
-    opacity: 0.4;
+  .btn:hover {
+    background: white;
+    color: black;
   }
 
 </style>
@@ -132,78 +107,85 @@
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <h1>Cymatics Studio Lab</h1>
-    <p>
-      A scientific exploration of sound made visible through frequency-controlled cymatics.
-      From 0 to 100 Hz — pure physical resonance shaping matter and motion.
-    </p>
-  </div>
-</section>
+<div class="wrap">
 
-<!-- SCIENCE -->
-<section class="science">
-  <div>
-    <h2>Frequency becomes structure</h2>
+  <!-- HEADER -->
+  <div class="label">CYMATICS STUDIO LAB / SYSTEM MANUAL</div>
+  <h1>Frequency-controlled cymatics visualization system</h1>
+
+  <p>
+    Cymatics Studio Lab is not an audio visualizer.<br>
+    It is a controlled frequency environment where sound (0–100 Hz)
+    generates structured physical resonance patterns.
+  </p>
+
+  <!-- SECTION 1 -->
+  <div class="block">
+    <h2>01 — Core principle</h2>
+    <p>
+      Cymatics is the study of visible sound vibration.
+      When a surface is exposed to controlled frequency energy,
+      matter organizes into geometric structures.
+    </p>
 
     <div class="hz">0 – 100 Hz</div>
 
-    <p class="range">
-      Controlled frequency range designed to visualize physical resonance patterns in real time.
-    </p>
-  </div>
-</section>
-
-<!-- EXPLANATION -->
-<section class="explore">
-  <div class="card">
-    <h2>What you are seeing</h2>
     <p>
-      Cymatics Studio Lab is based on the principle that sound frequencies can organize matter into geometric patterns.
-      By controlling low-frequency oscillations, you can observe the emergence of structured visual behavior.
+      This system focuses exclusively on low-frequency resonance,
+      where physical vibration becomes visually observable.
     </p>
   </div>
 
-  <div class="card">
-    <h2>0–100 Hz control system</h2>
+  <!-- SECTION 2 -->
+  <div class="block">
+    <h2>02 — System behavior</h2>
     <p>
-      Instead of audio-to-visual conversion, the system directly manipulates frequency excitation,
-      allowing precise exploration of wave behavior in a controlled environment.
+      Unlike traditional audio-to-visual tools, Cymatics Studio Lab
+      does not interpret sound.
+    </p>
+
+    <p>
+      It directly applies frequency excitation to a simulated medium,
+      producing stable or chaotic structural patterns depending on input.
     </p>
   </div>
-</section>
 
-<!-- DEMO -->
-<section class="demo">
-  <div>
-    <h2>Observe resonance in motion</h2>
-    <p>Real-time visualization of frequency-driven physical patterns.</p>
+  <!-- SECTION 3 -->
+  <div class="block">
+    <h2>03 — Frequency response</h2>
+    <p>
+      Lower frequencies (0–30 Hz): slow, large-scale wave structures.<br>
+      Mid frequencies (30–70 Hz): complex geometric interference.<br>
+      Higher range (70–100 Hz): dense, fast oscillation fields.
+    </p>
+  </div>
 
-    <div class="video-box">
+  <!-- DEMO -->
+  <div class="block">
+    <h2>04 — Observation layer</h2>
+
+    <p>
+      Real-time simulation of frequency-induced cymatic patterns.
+    </p>
+
+    <div class="video">
       <video autoplay muted loop controls>
         <source src="demo.mp4" type="video/mp4">
       </video>
     </div>
   </div>
-</section>
 
-<!-- FINAL CTA -->
-<section class="cta">
-  <div>
-    <h2>Start exploring cymatic frequency</h2>
+  <!-- CTA -->
+  <div class="cta">
+    <h2>Activate frequency visualization system</h2>
     <p>
-      Experience controlled resonance and visualized sound physics.
+      Download Cymatics Studio Lab and explore controlled resonance physics.
     </p>
 
-    <a class="button" href="#download">Download Cymatics Studio Lab</a>
+    <a class="btn" href="#download">Download application</a>
   </div>
-</section>
 
-<footer>
-  © 2026 Cymatics Studio Lab — All rights reserved
-</footer>
+</div>
 
 </body>
 </html>
