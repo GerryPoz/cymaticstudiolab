@@ -1,191 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cymatics Studio Lab — Manual</title>
-
-<style>
-  body {
-    margin: 0;
-    background: #07070a;
-    color: #eaeaea;
-    font-family: "SF Mono", "Courier New", monospace;
-    line-height: 1.6;
-  }
-
-  .wrap {
-    max-width: 900px;
-    margin: auto;
-    padding: 120px 24px;
-  }
-
-  /* TYPO SYSTEM */
-  h1 {
-    font-size: 42px;
-    font-weight: 500;
-    letter-spacing: -0.5px;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    margin-top: 80px;
-    font-size: 20px;
-    font-weight: 500;
-    opacity: 0.9;
-  }
-
-  p {
-    font-size: 15px;
-    opacity: 0.75;
-    margin-bottom: 20px;
-  }
-
-  .label {
-    font-size: 12px;
-    letter-spacing: 2px;
-    opacity: 0.5;
-    margin-bottom: 10px;
-  }
-
-  .hz {
-    font-size: 64px;
-    margin: 40px 0;
-    background: linear-gradient(90deg, #7c5cff, #00d4ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* BLOCKS */
-  .block {
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 40px;
-    margin-top: 40px;
-  }
-
-  /* VIDEO */
-  .video {
-    margin-top: 40px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  video {
-    width: 100%;
-    display: block;
-  }
-
-  /* CTA */
-  .cta {
-    margin-top: 120px;
-    padding: 40px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    text-align: center;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 22px;
-    border: 1px solid white;
-    border-radius: 999px;
-    font-size: 13px;
-    color: white;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-
-  .btn:hover {
-    background: white;
-    color: black;
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cymatics Studio Lab</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
 
-<div class="wrap">
+<div class="background-glow"></div>
 
-  <!-- HEADER -->
-  <div class="label">CYMATICS STUDIO LAB / SYSTEM MANUAL</div>
-  <h1>Frequency-controlled cymatics visualization system</h1>
+<header class="site-header">
+  <div class="container nav">
 
-  <p>
-    Cymatics Studio Lab is not an audio visualizer.<br>
-    It is a controlled frequency environment where sound (0–100 Hz)
-    generates structured physical resonance patterns.
-  </p>
+    <div class="brand">
+      <div class="brand-icon">
+        <img src="logo.png" alt="logo">
+      </div>
+      <div class="brand-text">
+        <span>CYMATICS</span>
+        <span class="gradient-text">STUDIO LAB</span>
+      </div>
+    </div>
 
-  <!-- SECTION 1 -->
-  <div class="block">
-    <h2>01 — Core principle</h2>
-    <p>
-      Cymatics is the study of visible sound vibration.
-      When a surface is exposed to controlled frequency energy,
-      matter organizes into geometric structures.
-    </p>
+    <button class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <div class="hz">0 – 100 Hz</div>
+    <nav class="nav-links" id="navMenu">
+      <a href="#features">Features</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-light" href="#download">Get the App</a>
+    </nav>
 
-    <p>
-      This system focuses exclusively on low-frequency resonance,
-      where physical vibration becomes visually observable.
-    </p>
   </div>
+</header>
 
-  <!-- SECTION 2 -->
-  <div class="block">
-    <h2>02 — System behavior</h2>
-    <p>
-      Unlike traditional audio-to-visual tools, Cymatics Studio Lab
-      does not interpret sound.
-    </p>
+<main>
 
-    <p>
-      It directly applies frequency excitation to a simulated medium,
-      producing stable or chaotic structural patterns depending on input.
-    </p>
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div class="hero-text">
+
+      <div class="hero-badge fade-up">
+        <img src="logo.png" class="hero-icon">
+        <p class="eyebrow">Real-time. Not pre-rendered.</p>
+      </div>
+
+      <h1 class="fade-up">
+        This is not animation.
+        <span class="gradient-text block">It’s real-time wave simulation.</span>
+      </h1>
+
+      <p class="hero-description fade-up">
+        Create generative art inspired by cymatics and Faraday waves.
+        Control every parameter in real time and export your creations.
+      </p>
+
+      <div class="hero-buttons fade-up">
+        <a id="download" class="btn btn-primary"
+          href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+          target="_blank">
+          Get it on Google Play
+        </a>
+
+        <a class="btn btn-secondary" href="#features">
+          Explore Features
+        </a>
+      </div>
+
+      <p class="price-note fade-up">
+        Premium app · €2.99 one-time purchase
+      </p>
+
+      <div class="trust-badges fade-up">
+        <span>✔ No ads</span>
+        <span>✔ No subscriptions</span>
+      </div>
+
+    </div>
+
+    <div class="hero-visual fade-up">
+      <div class="video-card">
+        <video autoplay muted loop playsinline poster="hero-poster.jpg">
+          <source src="hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <!-- SECTION 3 -->
-  <div class="block">
-    <h2>03 — Frequency response</h2>
-    <p>
-      Lower frequencies (0–30 Hz): slow, large-scale wave structures.<br>
-      Mid frequencies (30–70 Hz): complex geometric interference.<br>
-      Higher range (70–100 Hz): dense, fast oscillation fields.
-    </p>
-  </div>
+<!-- FEATURES -->
+<section id="features" class="section">
+  <div class="container">
 
-  <!-- DEMO -->
-  <div class="block">
-    <h2>04 — Observation layer</h2>
+    <div class="section-heading center fade-up">
+      <h2>Built for exploration</h2>
+    </div>
 
-    <p>
-      Real-time simulation of frequency-induced cymatic patterns.
-    </p>
+    <div class="feature-grid">
 
-    <div class="video">
-      <video autoplay muted loop controls>
-        <source src="demo.mp4" type="video/mp4">
-      </video>
+      <div class="card fade-up">
+        <h3>Full Control</h3>
+        <p>Adjust all wave parameters in real time.</p>
+      </div>
+
+      <div class="card fade-up">
+        <h3>Export & Presets</h3>
+        <p>Save images and reuse your creations.</p>
+      </div>
+
+      <div class="card fade-up">
+        <h3>Science + Art</h3>
+        <p>Explore cymatics through visual experience.</p>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- CTA -->
-  <div class="cta">
-    <h2>Activate frequency visualization system</h2>
-    <p>
-      Download Cymatics Studio Lab and explore controlled resonance physics.
-    </p>
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="container">
 
-    <a class="btn" href="#download">Download application</a>
+    <div class="section-heading fade-up">
+      <h2>What you can create</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item fade-up"><img src="gallery-1.jpg"></div>
+      <div class="gallery-item fade-up"><img src="gallery-2.jpg"></div>
+      <div class="gallery-item fade-up"><img src="gallery-3.jpg"></div>
+    </div>
+
   </div>
+</section>
 
-</div>
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+
+    <div class="section-heading center fade-up">
+      <h2>FAQ</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <details class="faq-item fade-up">
+        <summary>What is this?</summary>
+        <p>A real-time cymatics simulation app.</p>
+      </details>
+
+      <details class="faq-item fade-up">
+        <summary>Is it real-time?</summary>
+        <p>Yes. Everything is generated live.</p>
+      </details>
+
+      <details class="faq-item fade-up">
+        <summary>Can I export?</summary>
+        <p>Yes, you can save images.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+
+    <div class="final-cta fade-up">
+      <h2>Turn equations into art.</h2>
+      <a class="btn btn-primary"
+         href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+         target="_blank">
+         Download Now
+      </a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <p>© <span id="year"></span> Cymatics Studio Lab</p>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="mailto:your@email.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 
 </body>
 </html>
