@@ -6,6 +6,16 @@
   <title>Cymatics Studio Lab</title>
   <meta name="description" content="Real-time cymatics and Faraday wave simulation. Create generative art, export your creations, and explore the beauty of wave physics." />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EQ5ZXG1YFB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
 
@@ -67,7 +77,10 @@
               href="https://play.google.com/store/apps/details?id=cymatics.studio.lab.pro"
               target="_blank"
               rel="noopener noreferrer"
-            >
+              onclick="gtag('event', 'click_download', {
+                event_category: 'engagement',
+                event_label: 'google_play_click'
+              });">
               Get it on Google Play
             </a>
           
